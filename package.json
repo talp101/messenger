@@ -34,11 +34,14 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.2.4",
     "redux": "^3.4.0",
+    "redux-thunk": "^2.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
 }
