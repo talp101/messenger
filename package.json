@@ -1,0 +1,44 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "Messenger web app built with React , Redux and SocketIO",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talp101/messenger.git"
+  },
+  "author": "Tal Peretz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/talp101/messenger/issues"
+  },
+  "homepage": "https://github.com/talp101/messenger#readme",
+  "dependencies": {
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.7.6",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-decorators": "^6.6.5",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-es2015": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "express": "^4.13.4",
+    "file-loader": "^0.8.5",
+    "history": "^2.0.2",
+    "immutable": "^3.8.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.2.4",
+    "redux": "^3.4.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0"
+  },
+  "babel": {
+    "presets": ["es2015"]
+  }
+}
