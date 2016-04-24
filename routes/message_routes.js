@@ -10,8 +10,8 @@ import Message from '../models/Message';
 import Conversation from '../models/Conversation';
 
 router.post('/', function (req, res, next) {
-    let conversationId = req.params['conversationId'];
-    let userId = req.params['userId'];
+    let conversationId = req.body.conversationId;
+    let userId = req.body.userId;
 
     let newMessage = Message({
         text: req.body.text,

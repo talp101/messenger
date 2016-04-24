@@ -15,7 +15,7 @@ router.route('/')
     .post(function(req, res, next){
         let user = new User();
         user.userName = req.body.userName;
-        user.fistName = req.body.firstName;
+        user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.save(function(err){
             if(err)

@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 
 import conversations from './routes/converation_router'
-import messages from './routes/message_router'
+import messages from './routes/message_routes'
 import users from './routes/user_router'
 
 process.env.MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost/messenger';
