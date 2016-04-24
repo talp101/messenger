@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import path from 'path';
 
 import conversations from './routes/converation_router'
+import messages from './routes/message_router'
 
 process.env.MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost/messenger';
 process.env.PORT = process.env.PORT || 3485;
@@ -22,6 +23,7 @@ app.use('/static', express.static('static'));
 
 
 app.use('/api/conversations', conversations);
+app.use('/api/messages', messages);
 app.get('/' , (request, response) => {
     response.sendFile(path.join(__dirname, 'views/index.html'));
 });

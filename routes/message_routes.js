@@ -32,3 +32,5 @@ router.post('/', function (req, res, next) {
         });
     });
 });
+
+export default router;
