@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 
-
 class ConversationsList extends Component {
 
     openConversation(event){
         console.log(event.target);
+        this.context.history.pushState(null, `/conversation/${event.target.id}`);
     }
     render(){
         const {conversations, user, dispatch} = this.props;
         let conversationsList = conversations.data.map((conversation) => {
             return (
 
-                <li key={conversation._id} aria-layout="column" aria-layout-align="end end" className="collection-item avatar" onClick={this.openConversation.bind(this)}>
+                <li key={conversation._id} id={conversation._id} aria-layout="column" aria-layout-align="end end" className="collection-item avatar" onClick={this.openConversation.bind(this)}>
                     <i className="material-icons circle indigo darken-3">face</i>
                     <div className="conversation-main" aria-layout="column" aria-layout-align="start end">
                     <span className="title">{conversation.between.filter(user1 => user1._id != user._id)[0].lastName}</span>
@@ -49,5 +49,9 @@ class ConversationsList extends Component {
         )
     }
 }
+
+ConversationsList.contextTypes = {
+    history: React.PropTypes.object
+};
 
 export default ConversationsList;

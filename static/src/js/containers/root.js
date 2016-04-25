@@ -5,13 +5,15 @@ import AppFrame from '../components/app_frame';
 import IndexPage from '../components/index_page';
 import ConversationFrame from '../components/conversation_frame';
 import configureStore from '../store/configure_store';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 
 const initialState = {
     user: {
-        userName: 'shmulikc',
-        _id: "571cadca72d7a0e01112c80b",
-        firstName: 'שמוליק',
-        lastName: 'ציקושווילי'
+        userName: 'talp',
+        _id: "571ca5f1d5df12612151e361",
+        firstName: 'טל',
+        lastName: 'פרץ'
     },
     conversations: {
         loaded: false,

@@ -3,16 +3,27 @@ import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 
 class ConversationFrame extends Component {
+    constructor(props){
+        super(props);
+        this.id = -1;
+    }
+
     componentWillMount() {
         const { dispatch, user, messages, params } = this.props;
         dispatch(actions.fetchMessages(params.conversationId));
-        console.log(messages);
+    }
+
+    componentDidUpdate() {
+        if (this.id != this.props.params.conversationId){
+            this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
+            this.id = this.props.params.conversationId;
+
+        }
+
     }
 
     render() {
         const { dispatch, user, messages, params } = this.props;
-
-        console.log(messages);
         return (
             <div>
                 {messages.loaded &&
