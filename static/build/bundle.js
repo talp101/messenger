@@ -20043,11 +20043,11 @@
 
 	var _app_frame2 = _interopRequireDefault(_app_frame);
 
-	var _index_page = __webpack_require__(248);
+	var _index_page = __webpack_require__(249);
 
 	var _index_page2 = _interopRequireDefault(_index_page);
 
-	var _configure_store = __webpack_require__(249);
+	var _configure_store = __webpack_require__(250);
 
 	var _configure_store2 = _interopRequireDefault(_configure_store);
 
@@ -20059,7 +20059,20 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var store = (0, _configure_store2.default)();
+	var initialState = {
+	    user: {
+	        userName: 'talp',
+	        _id: "571ca5f1d5df12612151e361",
+	        firstName: 'טל',
+	        lastName: 'פרץ'
+	    },
+	    conversations: {
+	        loaded: false,
+	        data: []
+	    }
+	};
+
+	var store = (0, _configure_store2.default)(initialState);
 
 	var Root = function (_Component) {
 	    _inherits(Root, _Component);
@@ -26915,6 +26928,18 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _conversation_container = __webpack_require__(248);
+
+	var _conversation_container2 = _interopRequireDefault(_conversation_container);
+
+	var _actions = __webpack_require__(278);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	var _reactRedux = __webpack_require__(224);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26933,16 +26958,31 @@
 	    }
 
 	    _createClass(AppFrame, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _props = this.props;
+	            var dispatch = _props.dispatch;
+	            var user = _props.user;
+
+	            dispatch(actions.fetchConversations(user._id));
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var _props2 = this.props;
+	            var dispatch = _props2.dispatch;
+	            var user = _props2.user;
+	            var conversations = _props2.conversations;
+
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { 'aria-layout': 'row', 'aria-flex': true, 'aria-layout-fill': true },
 	                _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { 'aria-layout': 'column', 'aria-flex': true, 'aria-layout-fill': true, className: 'wrapper' },
 	                    this.props.children
-	                )
+	                ),
+	                conversations.data.length > 0 && _react2.default.createElement(_conversation_container2.default, { conversations: conversations, user: user, dispatch: dispatch })
 	            );
 	        }
 	    }]);
@@ -26954,10 +26994,85 @@
 	    children: _react.PropTypes.object.isRequired
 	};
 
-	exports.default = AppFrame;
+	function mapStateToProps(state) {
+	    return {
+	        conversations: state.conversations,
+	        user: state.user
+	    };
+	}
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AppFrame);
 
 /***/ },
 /* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _conversation_list = __webpack_require__(256);
+
+	var _conversation_list2 = _interopRequireDefault(_conversation_list);
+
+	var _search_panel = __webpack_require__(257);
+
+	var _search_panel2 = _interopRequireDefault(_search_panel);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ConversationContainer = function (_Component) {
+	    _inherits(ConversationContainer, _Component);
+
+	    function ConversationContainer() {
+	        _classCallCheck(this, ConversationContainer);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ConversationContainer).apply(this, arguments));
+	    }
+
+	    _createClass(ConversationContainer, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            console.log('adsfe');
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props;
+	            var dispatch = _props.dispatch;
+	            var user = _props.user;
+	            var conversations = _props.conversations;
+
+	            console.log(conversations);
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_search_panel2.default, { dispatch: dispatch }),
+	                _react2.default.createElement(_conversation_list2.default, { conversations: conversations, dispatch: dispatch, user: user })
+	            );
+	        }
+	    }]);
+
+	    return ConversationContainer;
+	}(_react.Component);
+
+	exports.default = ConversationContainer;
+
+/***/ },
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27010,7 +27125,7 @@
 	exports.default = IndexPage;
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27022,31 +27137,37 @@
 
 	var _redux = __webpack_require__(231);
 
-	var _promise_middleware = __webpack_require__(250);
+	var _promise_middleware = __webpack_require__(251);
 
 	var _promise_middleware2 = _interopRequireDefault(_promise_middleware);
 
-	var _reduxThunk = __webpack_require__(251);
+	var _reduxThunk = __webpack_require__(252);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _reducers = __webpack_require__(252);
+	var _reduxLogger = __webpack_require__(281);
 
-	var reducers = _interopRequireWildcard(_reducers);
+	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _index = __webpack_require__(253);
+
+	var _index2 = _interopRequireDefault(_index);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var rootReducer = (0, _redux.combineReducers)(reducers);
-	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _promise_middleware2.default)(_redux.createStore);
+	var loggerMiddleware = (0, _reduxLogger2.default)();
 
 	function configureStore(initialState) {
-	    return createStoreWithMiddleware(rootReducer, initialState);
+	    return (0, _redux.createStore)(_index2.default, initialState, (0, _redux.applyMiddleware)(_reduxThunk2.default, loggerMiddleware));
 	}
+	//
+	// const createStoreWithMiddleware = applyMiddleware(thunk, promiseMiddleware)(createStore);
+	// export default function configureStore(initialState) {
+	//     return createStoreWithMiddleware(rootReducer, initialState);
+	// }
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27092,7 +27213,7 @@
 	}
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -27115,27 +27236,6 @@
 	}
 
 /***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _messages = __webpack_require__(253);
-
-	Object.defineProperty(exports, 'messages', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_messages).default;
-	  }
-	});
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27144,34 +27244,29 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = messages;
 
-	var _immutable = __webpack_require__(254);
+	var _conversations = __webpack_require__(277);
 
-	var _immutable2 = _interopRequireDefault(_immutable);
+	var _conversations2 = _interopRequireDefault(_conversations);
+
+	var _user = __webpack_require__(280);
+
+	var _user2 = _interopRequireDefault(_user);
+
+	var _redux = __webpack_require__(231);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var initialState = _immutable2.default.Map({
-	    messagesCount: 1
+	var rootReducer = (0, _redux.combineReducers)({
+	    conversations: _conversations2.default,
+	    user: _user2.default
 	});
 
-	function messages() {
-	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	    var action = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-
-	    switch (action.type) {
-	        case 'MESSAGES_COUNT':
-	            return state.merge({
-	                messagesCount: action.messagesCount
-	            });
-	        default:
-	            return state;
-	    }
-	}
+	exports.default = rootReducer;
 
 /***/ },
-/* 254 */
+/* 254 */,
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -32146,6 +32241,567 @@
 	  return Immutable;
 
 	}));
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ConversationsList = function (_Component) {
+	    _inherits(ConversationsList, _Component);
+
+	    function ConversationsList() {
+	        _classCallCheck(this, ConversationsList);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ConversationsList).apply(this, arguments));
+	    }
+
+	    _createClass(ConversationsList, [{
+	        key: "openConversation",
+	        value: function openConversation(event) {
+	            console.log(event.target);
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var _this2 = this;
+
+	            var _props = this.props;
+	            var conversations = _props.conversations;
+	            var user = _props.user;
+	            var dispatch = _props.dispatch;
+
+	            var conversationsList = conversations.data.map(function (conversation) {
+	                return _react2.default.createElement(
+	                    "li",
+	                    { key: conversation._id, "aria-layout": "column", "aria-layout-align": "end end", className: "collection-item avater" },
+	                    _react2.default.createElement(
+	                        "i",
+	                        { className: "material-icons circle indigo darken-3" },
+	                        "face"
+	                    ),
+	                    _react2.default.createElement(
+	                        "span",
+	                        { className: "title" },
+	                        conversation.between.filter(function (user1) {
+	                            return user1._id != user._id;
+	                        })[0]
+	                    ),
+	                    _react2.default.createElement(
+	                        "a",
+	                        { className: "secondary-content" },
+	                        _react2.default.createElement(
+	                            "i",
+	                            { onClick: _this2.openConversation.bind(_this2), className: "material-icons pointer grey-text" },
+	                            "email"
+	                        )
+	                    )
+	                );
+	            });
+
+	            return _react2.default.createElement(
+	                "div",
+	                null,
+	                _react2.default.createElement(
+	                    "li",
+	                    { "aria-layout": "column", className: "m-t-n w-full" },
+	                    _react2.default.createElement(
+	                        "ul",
+	                        { className: "collection" },
+	                        conversationsList
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return ConversationsList;
+	}(_react.Component);
+
+	exports.default = ConversationsList;
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SearchPanel = function (_Component) {
+	    _inherits(SearchPanel, _Component);
+
+	    function SearchPanel(props, context) {
+	        _classCallCheck(this, SearchPanel);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SearchPanel).call(this, props, context));
+
+	        _this.state = {
+	            query: ''
+	        };
+	        return _this;
+	    }
+
+	    _createClass(SearchPanel, [{
+	        key: 'handleChange',
+	        value: function handleChange(event) {
+	            this.setState({ query: event.target.value });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var dispatch = this.props.dispatch;
+
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement('input', { type: 'text', value: this.state.query, onChange: this.handleChange.bind(this) })
+	            );
+	        }
+	    }]);
+
+	    return SearchPanel;
+	}(_react.Component);
+
+	exports.default = SearchPanel;
+
+/***/ },
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var LOAD_CONVERSATIONS = exports.LOAD_CONVERSATIONS = 'LOAD_CONVERSATIONS';
+	var LOAD_CONVERSATIONS_SUCCESS = exports.LOAD_CONVERSATIONS_SUCCESS = 'LOAD_CONVERSATIONS_SUCCESS';
+	var LOAD_CONVERSATIONS_FAIL = exports.LOAD_CONVERSATIONS_FAIL = 'LOAD_CONVERSATIONS_FAIL';
+	var SAVE_USER = exports.SAVE_USER = 'SAVE_USER';
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.default = conversations;
+
+	var _action_types = __webpack_require__(276);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var initialState = {
+	    loaded: false,
+	    data: []
+	};
+
+	function conversations() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _action_types.LOAD_CONVERSATIONS:
+	            return _extends({}, state, {
+	                loading: true
+	            });
+	        case _action_types.LOAD_CONVERSATIONS_FAIL:
+	            return _extends({}, state, {
+	                loading: false,
+	                loaded: false,
+	                error: action.error,
+	                data: [].concat(_toConsumableArray(state.data))
+	            });
+	        case _action_types.LOAD_CONVERSATIONS_SUCCESS:
+	            return _extends({}, state, {
+	                loading: false,
+	                loaded: true,
+	                data: [].concat(_toConsumableArray(state.data), _toConsumableArray(action.conversations))
+	            });
+	        default:
+	            return state;
+	    }
+	}
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.fetchConversations = fetchConversations;
+
+	var _action_types = __webpack_require__(276);
+
+	var types = _interopRequireWildcard(_action_types);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function fetchConversations(user) {
+	    return function (dispatch) {
+	        dispatch(requestConversations());
+	        return fetch('/api/users/' + user + '/conversations/').then(function (response) {
+	            return response.json();
+	        }).then(function (conversations) {
+	            return dispatch(receiveConversations(conversations));
+	        }).catch(function (error) {
+	            throw error;
+	        });
+	    };
+	}
+
+	function requestConversations() {
+	    return {
+	        type: types.LOAD_CONVERSATIONS
+	    };
+	}
+
+	function receiveConversations(conversations) {
+	    return {
+	        type: types.LOAD_CONVERSATIONS_SUCCESS,
+	        conversations: conversations
+	    };
+	}
+
+/***/ },
+/* 279 */,
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = user;
+
+	var _action_types = __webpack_require__(276);
+
+	var types = _interopRequireWildcard(_action_types);
+
+	var _immutable = __webpack_require__(255);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var initialState = _immutable2.default.Map({
+	    user: {
+	        userName: '',
+	        _id: '',
+	        firstName: '',
+	        lastName: ''
+	    }
+	});
+
+	function user() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case types.SAVE_USER:
+	            return action.user;
+	        default:
+	            return state;
+	    }
+	};
+
+/***/ },
+/* 281 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
+	var repeat = function repeat(str, times) {
+	  return new Array(times + 1).join(str);
+	};
+	var pad = function pad(num, maxLength) {
+	  return repeat("0", maxLength - num.toString().length) + num;
+	};
+	var formatTime = function formatTime(time) {
+	  return "@ " + pad(time.getHours(), 2) + ":" + pad(time.getMinutes(), 2) + ":" + pad(time.getSeconds(), 2) + "." + pad(time.getMilliseconds(), 3);
+	};
+
+	// Use the new performance api to get better precision if available
+	var timer = typeof performance !== "undefined" && typeof performance.now === "function" ? performance : Date;
+
+	/**
+	 * parse the level option of createLogger
+	 *
+	 * @property {string | function | object} level - console[level]
+	 * @property {object} action
+	 * @property {array} payload
+	 * @property {string} type
+	 */
+
+	function getLogLevel(level, action, payload, type) {
+	  switch (typeof level === "undefined" ? "undefined" : _typeof(level)) {
+	    case "object":
+	      return typeof level[type] === "function" ? level[type].apply(level, _toConsumableArray(payload)) : level[type];
+	    case "function":
+	      return level(action);
+	    default:
+	      return level;
+	  }
+	}
+
+	/**
+	 * Creates logger with followed options
+	 *
+	 * @namespace
+	 * @property {object} options - options for logger
+	 * @property {string | function | object} options.level - console[level]
+	 * @property {boolean} options.duration - print duration of each action?
+	 * @property {boolean} options.timestamp - print timestamp with each action?
+	 * @property {object} options.colors - custom colors
+	 * @property {object} options.logger - implementation of the `console` API
+	 * @property {boolean} options.logErrors - should errors in action execution be caught, logged, and re-thrown?
+	 * @property {boolean} options.collapsed - is group collapsed?
+	 * @property {boolean} options.predicate - condition which resolves logger behavior
+	 * @property {function} options.stateTransformer - transform state before print
+	 * @property {function} options.actionTransformer - transform action before print
+	 * @property {function} options.errorTransformer - transform error before print
+	 */
+
+	function createLogger() {
+	  var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	  var _options$level = options.level;
+	  var level = _options$level === undefined ? "log" : _options$level;
+	  var _options$logger = options.logger;
+	  var logger = _options$logger === undefined ? console : _options$logger;
+	  var _options$logErrors = options.logErrors;
+	  var logErrors = _options$logErrors === undefined ? true : _options$logErrors;
+	  var collapsed = options.collapsed;
+	  var predicate = options.predicate;
+	  var _options$duration = options.duration;
+	  var duration = _options$duration === undefined ? false : _options$duration;
+	  var _options$timestamp = options.timestamp;
+	  var timestamp = _options$timestamp === undefined ? true : _options$timestamp;
+	  var transformer = options.transformer;
+	  var _options$stateTransfo = options.stateTransformer;
+	  var // deprecated
+	  stateTransformer = _options$stateTransfo === undefined ? function (state) {
+	    return state;
+	  } : _options$stateTransfo;
+	  var _options$actionTransf = options.actionTransformer;
+	  var actionTransformer = _options$actionTransf === undefined ? function (actn) {
+	    return actn;
+	  } : _options$actionTransf;
+	  var _options$errorTransfo = options.errorTransformer;
+	  var errorTransformer = _options$errorTransfo === undefined ? function (error) {
+	    return error;
+	  } : _options$errorTransfo;
+	  var _options$colors = options.colors;
+	  var colors = _options$colors === undefined ? {
+	    title: function title() {
+	      return "#000000";
+	    },
+	    prevState: function prevState() {
+	      return "#9E9E9E";
+	    },
+	    action: function action() {
+	      return "#03A9F4";
+	    },
+	    nextState: function nextState() {
+	      return "#4CAF50";
+	    },
+	    error: function error() {
+	      return "#F20404";
+	    }
+	  } : _options$colors;
+
+	  // exit if console undefined
+
+	  if (typeof logger === "undefined") {
+	    return function () {
+	      return function (next) {
+	        return function (action) {
+	          return next(action);
+	        };
+	      };
+	    };
+	  }
+
+	  if (transformer) {
+	    console.error("Option 'transformer' is deprecated, use stateTransformer instead");
+	  }
+
+	  var logBuffer = [];
+	  function printBuffer() {
+	    logBuffer.forEach(function (logEntry, key) {
+	      var started = logEntry.started;
+	      var startedTime = logEntry.startedTime;
+	      var action = logEntry.action;
+	      var prevState = logEntry.prevState;
+	      var error = logEntry.error;
+	      var took = logEntry.took;
+	      var nextState = logEntry.nextState;
+
+	      var nextEntry = logBuffer[key + 1];
+	      if (nextEntry) {
+	        nextState = nextEntry.prevState;
+	        took = nextEntry.started - started;
+	      }
+	      // message
+	      var formattedAction = actionTransformer(action);
+	      var isCollapsed = typeof collapsed === "function" ? collapsed(function () {
+	        return nextState;
+	      }, action) : collapsed;
+
+	      var formattedTime = formatTime(startedTime);
+	      var titleCSS = colors.title ? "color: " + colors.title(formattedAction) + ";" : null;
+	      var title = "action " + (timestamp ? formattedTime : "") + " " + formattedAction.type + " " + (duration ? "(in " + took.toFixed(2) + " ms)" : "");
+
+	      // render
+	      try {
+	        if (isCollapsed) {
+	          if (colors.title) logger.groupCollapsed("%c " + title, titleCSS);else logger.groupCollapsed(title);
+	        } else {
+	          if (colors.title) logger.group("%c " + title, titleCSS);else logger.group(title);
+	        }
+	      } catch (e) {
+	        logger.log(title);
+	      }
+
+	      var prevStateLevel = getLogLevel(level, formattedAction, [prevState], "prevState");
+	      var actionLevel = getLogLevel(level, formattedAction, [formattedAction], "action");
+	      var errorLevel = getLogLevel(level, formattedAction, [error, prevState], "error");
+	      var nextStateLevel = getLogLevel(level, formattedAction, [nextState], "nextState");
+
+	      if (prevStateLevel) {
+	        if (colors.prevState) logger[prevStateLevel]("%c prev state", "color: " + colors.prevState(prevState) + "; font-weight: bold", prevState);else logger[prevStateLevel]("prev state", prevState);
+	      }
+
+	      if (actionLevel) {
+	        if (colors.action) logger[actionLevel]("%c action", "color: " + colors.action(formattedAction) + "; font-weight: bold", formattedAction);else logger[actionLevel]("action", formattedAction);
+	      }
+
+	      if (error && errorLevel) {
+	        if (colors.error) logger[errorLevel]("%c error", "color: " + colors.error(error, prevState) + "; font-weight: bold", error);else logger[errorLevel]("error", error);
+	      }
+
+	      if (nextStateLevel) {
+	        if (colors.nextState) logger[nextStateLevel]("%c next state", "color: " + colors.nextState(nextState) + "; font-weight: bold", nextState);else logger[nextStateLevel]("next state", nextState);
+	      }
+
+	      try {
+	        logger.groupEnd();
+	      } catch (e) {
+	        logger.log("—— log end ——");
+	      }
+	    });
+	    logBuffer.length = 0;
+	  }
+
+	  return function (_ref) {
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        // exit early if predicate function returns false
+	        if (typeof predicate === "function" && !predicate(getState, action)) {
+	          return next(action);
+	        }
+
+	        var logEntry = {};
+	        logBuffer.push(logEntry);
+
+	        logEntry.started = timer.now();
+	        logEntry.startedTime = new Date();
+	        logEntry.prevState = stateTransformer(getState());
+	        logEntry.action = action;
+
+	        var returnedValue = undefined;
+	        if (logErrors) {
+	          try {
+	            returnedValue = next(action);
+	          } catch (e) {
+	            logEntry.error = errorTransformer(e);
+	          }
+	        } else {
+	          returnedValue = next(action);
+	        }
+
+	        logEntry.took = timer.now() - logEntry.started;
+	        logEntry.nextState = stateTransformer(getState());
+
+	        printBuffer();
+
+	        if (logEntry.error) throw logEntry.error;
+	        return returnedValue;
+	      };
+	    };
+	  };
+	}
+
+	module.exports = createLogger;
 
 /***/ }
 /******/ ]);
