@@ -26,7 +26,7 @@ app.use('/api/conversations', conversations);
 app.use('/api/users', users);
 app.use('/api/messages', messages);
 
-app.get('/' , (request, response) => {
+app.get('*' , (request, response) => {
     response.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
