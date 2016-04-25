@@ -13,7 +13,6 @@ class ConversationContainer extends Component{
         console.log(conversations);
         return (
             <div>
-                <SearchPanel dispatch={dispatch}/>
                 <ConversationsList conversations={conversations} dispatch={dispatch} user={user}/>
             </div>
         )

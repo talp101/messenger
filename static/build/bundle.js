@@ -27060,7 +27060,6 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_search_panel2.default, { dispatch: dispatch }),
 	                _react2.default.createElement(_conversation_list2.default, { conversations: conversations, dispatch: dispatch, user: user })
 	            );
 	        }
@@ -32292,27 +32291,40 @@
 
 	            var conversationsList = conversations.data.map(function (conversation) {
 	                return _react2.default.createElement(
-	                    "li",
-	                    { key: conversation._id, "aria-layout": "column", "aria-layout-align": "end end", className: "collection-item avater" },
+	                    "div",
+	                    { className: "conversation-container" },
 	                    _react2.default.createElement(
-	                        "i",
-	                        { className: "material-icons circle indigo darken-3" },
-	                        "face"
-	                    ),
-	                    _react2.default.createElement(
-	                        "span",
-	                        { className: "title" },
-	                        conversation.between.filter(function (user1) {
-	                            return user1._id != user._id;
-	                        })[0]
-	                    ),
-	                    _react2.default.createElement(
-	                        "a",
-	                        { className: "secondary-content" },
+	                        "li",
+	                        { key: conversation._id, "aria-layout": "column", "aria-layout-align": "end end", className: "collection-item avatar", onClick: _this2.openConversation.bind(_this2) },
 	                        _react2.default.createElement(
 	                            "i",
-	                            { onClick: _this2.openConversation.bind(_this2), className: "material-icons pointer grey-text" },
-	                            "email"
+	                            { className: "material-icons circle indigo darken-3" },
+	                            "face"
+	                        ),
+	                        _react2.default.createElement(
+	                            "div",
+	                            { className: "conversation-main" },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "title" },
+	                                conversation.between.filter(function (user1) {
+	                                    return user1._id != user._id;
+	                                })[0].lastName
+	                            ),
+	                            _react2.default.createElement(
+	                                "p",
+	                                { className: "brown-text text-lighten-3", "aria-layout": "row", "aria-layout-align": "end end" },
+	                                "יא זין"
+	                            ),
+	                            _react2.default.createElement(
+	                                "a",
+	                                { className: "secondary-content" },
+	                                _react2.default.createElement(
+	                                    "span",
+	                                    { className: "unread-count" },
+	                                    "1"
+	                                )
+	                            )
 	                        )
 	                    )
 	                );
@@ -32320,14 +32332,50 @@
 
 	            return _react2.default.createElement(
 	                "div",
-	                null,
+	                { className: "grey lighten-5", "aria-layout": "column", "aria-flex": "25", "aria-layout-align": "start end", "aria-layout-fill": true },
 	                _react2.default.createElement(
-	                    "li",
-	                    { "aria-layout": "column", className: "m-t-n w-full" },
+	                    "ul",
+	                    { className: "right side-nav fixed contacts_menu", "aria-layout-fill": true },
 	                    _react2.default.createElement(
-	                        "ul",
-	                        { className: "collection" },
-	                        conversationsList
+	                        "li",
+	                        { className: "indigo lighten-1 white-text w-full h-xs", "aria-layout": "row", "aria-layout-align": "center center" },
+	                        _react2.default.createElement(
+	                            "span",
+	                            { className: "brown-text text-lighten-4 text-1-5x m-l" },
+	                            "Messenger"
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "li",
+	                        { "aria-layout": "column", className: "wrapper w-full", "aria-layout-align": "center center" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { "aria-layout": "row", "aria-layout-align": "center center" },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "brown-text text-lighten-4 text-1-5x" },
+	                                "היי ",
+	                                user.lastName
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        "li",
+	                        { "aria-layout": "column", className: "m-t-n w-full" },
+	                        _react2.default.createElement(
+	                            "div",
+	                            { "aria-layout": "row", "aria-layout-align": "center center" },
+	                            _react2.default.createElement(
+	                                "span",
+	                                { className: "brown-text text-lighten-3" },
+	                                "תתחיל לשלוח הודעות בכיף"
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            "ul",
+	                            { className: "collection" },
+	                            conversationsList
+	                        )
 	                    )
 	                )
 	            );

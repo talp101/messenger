@@ -339,3 +339,39 @@ input[type=number]:focus:not([readonly]) {
 .selectize-control.tableSubject{
     height: 91px !important;
 }
+.conversation-main{
+    margin-right: 15px;
+
+}
+.conversation-container:hover{
+    background-color: lightgrey;
+    cursor: pointer;
+    cursor: hand;
+}
+.unread-count {
+    transform: scaleX(1) scaleY(1);
+    opacity: 1;
+    background-color: #09d261;
+    color: #fff;
+    font-weight: 500;
+    font-size: 12px!important;
+    padding: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 19px;
+    min-width: 19px;
+    box-sizing: border-box;
+    line-height: normal;
+}

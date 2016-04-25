@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.route('/')
     .get(function (req, res, next){
-        Conversation.find(function(err, converstaions){
+        Conversation.find().populate('between').exec(function(err, converstaions){
             if(err)
                 res.send(err);
             res.json(converstaions);
