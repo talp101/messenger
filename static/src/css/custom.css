@@ -343,7 +343,7 @@ input[type=number]:focus:not([readonly]) {
     margin-right: 15px;
 
 }
-.conversation-container:hover{
+.collection-item:hover{
     background-color: lightgrey;
     cursor: pointer;
     cursor: hand;
@@ -374,4 +374,9 @@ input[type=number]:focus:not([readonly]) {
     min-width: 19px;
     box-sizing: border-box;
     line-height: normal;
+}
+.conversation-time{
+    left: 40px !important;
+    display: inline-block;
+    top: 57px !important;
 }

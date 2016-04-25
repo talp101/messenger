@@ -10,18 +10,18 @@ class ConversationsList extends Component {
         const {conversations, user, dispatch} = this.props;
         let conversationsList = conversations.data.map((conversation) => {
             return (
-                <div className="conversation-container">
+
                 <li key={conversation._id} aria-layout="column" aria-layout-align="end end" className="collection-item avatar" onClick={this.openConversation.bind(this)}>
                     <i className="material-icons circle indigo darken-3">face</i>
-                    <div className="conversation-main">
+                    <div className="conversation-main" aria-layout="column" aria-layout-align="start end">
                     <span className="title">{conversation.between.filter(user1 => user1._id != user._id)[0].lastName}</span>
                     <p className="brown-text text-lighten-3" aria-layout="row" aria-layout-align="end end">
-                        יא זין
+                        {conversation.messages[0].text}
                     </p>
-                        <a className="secondary-content"><span className="unread-count">1</span></a>
+                            <a className="secondary-content"><span className="unread-count"></span></a>
+                            <p className="secondary-content conversation-time">{new Date(conversation.messages[0].timestamp).toTimeString().substring(0,5)}</p>
                     </div>
                 </li>
-                    </div>
             )
         });
         
