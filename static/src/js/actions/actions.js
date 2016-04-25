@@ -22,3 +22,26 @@ function receiveConversations(conversations) {
         conversations
     }
 }
+
+export function fetchMessages(conversationId) {
+    return dispatch => {
+        dispatch(requestMessages())
+        return fetch(`/api/conversations/${conversationId}`)
+            .then(response => response.json())
+            .then(messages => dispatch(receiveMessages(messages)))
+            .catch(error => {throw error});
+    }
+}
+
+function requestMessages() {
+    return {
+        type: types.LOAD_MESSAGES
+    }
+}
+
+function receiveMessages(messages) {
+    return {
+        type: types.LOAD_MESSAGES_SUCCESS,
+        messages
+    }
+}
