@@ -49,7 +49,8 @@ html, body {
     box-shadow: none;
 }
 .side-nav li:hover, .side-nav li.active {
-    background-color: transparent;
+    cursor: hand;
+    cursor: pointer;
 }
 
 .selectize-input {
@@ -341,8 +342,8 @@ input[type=number]:focus:not([readonly]) {
 }
 .conversation-main{
     margin-right: 15px;
-
 }
+
 .collection-item:hover{
     background-color: lightgrey;
     cursor: pointer;
@@ -379,4 +380,30 @@ input[type=number]:focus:not([readonly]) {
     left: 40px !important;
     display: inline-block;
     top: 57px !important;
+}
+
+.messenger-background{
+    /*background: #0084ff !important;*/
+    background: linear-gradient(to top, #0084ff, #00C5FF) !important;
+}
+
+.side-nav a:hover {
+     background-color: rgba(0,0,0,0.0) !important;
+}
+
+.index-title {
+    margin-right: 5em;
+    margin-top: 2em;
+}
+
+.index-page-wrapper{
+    min-height: 24em;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.messenger-logo {
+    margin-right: 20em;
+    margin-top:3em;
 }
