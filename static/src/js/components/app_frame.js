@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ConversationContainer from '../containers/conversation_container';
+import ConversationListContainer from '../containers/conversation_list_container';
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 
@@ -18,7 +18,7 @@ class AppFrame extends Component{
                             {this.props.children}
                         </div>
                         {conversations.data.length > 0 &&
-                            <ConversationContainer conversations={conversations} user={user} dispatch={dispatch}/>
+                            <ConversationListContainer conversations={conversations} user={user} dispatch={dispatch}/>
                         }
                         
                     </div>

@@ -1,18 +1,46 @@
 import React, {Component, PropTypes} from 'react';
+import * as actions from '../actions/actions';
+import { connect } from 'react-redux';
+import ConversationComponent from '../components/conversation';
 
-import ConversationsList from '../components/conversation_list';
-import SearchPanel from '../components/search_panel';
+class ConversationContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.id = -1;
+    }
 
+    componentWillMount() {
+        const { dispatch, user, messages, params } = this.props;
+        dispatch(actions.fetchMessages(params.conversationId));
+    }
 
-class ConversationContainer extends Component{
-    render(){
-        const {dispatch, user, conversations} = this.props;
+    componentDidUpdate() {
+        if (this.id != this.props.params.conversationId) {
+            this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
+            this.id = this.props.params.conversationId;
+
+        }
+
+    }
+
+    render() {
+        const { dispatch, user, messages } = this.props;
+        console.log(this.props);
         return (
             <div>
-                <ConversationsList conversations={conversations} dispatch={dispatch} user={user}/>
+                {
+                    messages.loaded &&
+                        <ConversationComponent messages={messages} user={user} dispatch={dispatch} />
+                }
             </div>
         )
     }
 }
 
-export default ConversationContainer;
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        messages: state.messages
+    }
+}
+export default connect(mapStateToProps)(ConversationContainer);
