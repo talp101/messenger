@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            display: flex;
+            width: 100%;
+            position: absolute;
+            height: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .right-col {
+            flex-flow: column wrap;
+            flex-grow: 1;
+            height: 100%;
+            display: flex;
+        }
+        .menu {
+            flex-basis: 10%;
+            background: lightblue;
+        }
+        .header {
+            flex: 0 0 10%;
+            background: lightgray;
+        }
+        .body {
+            flex: 0 0 80%;
+            background: purple;
+        }
+        .footer {
+            flex: 0 0 10%;
+            background: lightgreen;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="menu">Menu</div>
+    <div class="right-col">
+        <div class="header">Header</div>
+        <div class="body">Body</div>
+        <div class="footer">Footer</div>
+    </div>
+</div>
+</body>
+</html>

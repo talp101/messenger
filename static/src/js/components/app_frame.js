@@ -13,14 +13,15 @@ class AppFrame extends Component{
     render(){
         const {dispatch, user, conversations} = this.props;
         return (
-                    <div aria-layout="row" aria-flex aria-layout-fill>
-                        <div aria-layout="column" aria-flex aria-layout-fill className="wrapper">
+                    <div aria-layout="row"  aria-layout-fill aria-layout-align="start start">
+                        <div aria-layout="column" aria-flex aria-layout-fill aria-layout-align="end center">
                             {this.props.children}
                         </div>
                         {conversations.data.length > 0 &&
-                            <ConversationContainer conversations={conversations} user={user} dispatch={dispatch}/>
+                            <div aria-layout="column" dir="rtl" aria-flex="25" aria-layout-fill aria-layout-align="start end">
+                                <ConversationContainer conversations={conversations} user={user} dispatch={dispatch}/>
+                            </div>
                         }
-                        
                     </div>
             )}
 }
