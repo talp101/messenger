@@ -19,8 +19,12 @@ const initialState = {
     conversations: {
         loaded: false,
         data: getDataFromLocalStorage('conversations')
-    }, messages: {
+    },
+    messages: {
         loaded: false,
+        data: {}
+    },
+    conversationUnreadCounters: {
         data: {}
     }
 };

@@ -7,10 +7,10 @@ class ConversationsList extends Component {
     }
 
     render(){
-        const {conversations, user, dispatch} = this.props;
+        const {conversations, user, conversationUnreadCounters, dispatch} = this.props;
         let conversationsList = conversations.data.map((conversation, index) => {
             return (
-                <Conversation key={index} conversation={conversation} openConversation={this.openConversation.bind(this)} current_user={user} />
+                <Conversation key={index} conversation={conversation} openConversation={this.openConversation.bind(this)} unreadCounter={conversationUnreadCounters.data[conversation._id]} current_user={user} />
             )
         });
         

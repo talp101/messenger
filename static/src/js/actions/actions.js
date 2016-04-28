@@ -1,4 +1,5 @@
 import * as types from '../constants/action_types';
+import * as utils from '../utils/utils';
 
 let conversationsFetcherWorker = false;
 
@@ -9,7 +10,9 @@ export function fetchConversations(user) {
             .then(response => response.json())
             .then(conversations => {
                 if (JSON.stringify(getState().conversations.data)!==JSON.stringify(conversations)){
-                    dispatch(receiveConversations(conversations))
+                    dispatch(receiveConversations(conversations));
+                    dispatch(initCountUnreadMessagesByConversations(conversations));
+                    dispatch(countUnreadMessagesByConversations(conversations));
                 }
             })
             .catch(error => {throw error});
@@ -23,18 +26,17 @@ function requestConversations() {
 }
 
 function receiveConversations(conversations) {
-    return {
-        type: types.LOAD_CONVERSATIONS_SUCCESS,
-        conversations
-    }
+        return  {
+            type: types.LOAD_CONVERSATIONS_SUCCESS,
+            conversations
+        }
 }
-
 export function fetchMessages(conversationId) {
     return dispatch => {
         dispatch(requestMessages())
         return fetch(`/api/conversations/${conversationId}`)
             .then(response => response.json())
-            .then(messages => dispatch(receiveMessages(messages)))
+            .then(messages => dispatch(receiveMessages(messages, conversationId)))
             .catch(error => {throw error});
     }
 }
@@ -45,10 +47,11 @@ function requestMessages() {
     }
 }
 
-function receiveMessages(messages) {
+function receiveMessages(messages, conversationId) {
     return {
         type: types.LOAD_MESSAGES_SUCCESS,
-        messages
+        messages,
+        conversationId
     }
 }
 
@@ -61,10 +64,46 @@ export function initConversations(userId) {
                 dispatch(fetchConversations(userId));
                 let ConversationsFetcherWorker = require("worker-static-loader?{'staticPath':'static/build/'}!./conversations_fetcher_worker.js")
                 conversationsFetcherWorker = new ConversationsFetcherWorker();
-                console.log(userId);
                 conversationsFetcherWorker.postMessage({userId:userId});
                 conversationsFetcherWorker.onmessage = (e) => {
                     dispatch(receiveConversations(e.data.conversations));
                 };
         }
+}
+
+export function countUnreadMessagesByConversations(conversations){
+    console.log('tal')
+    console.log(conversations);
+    return dispatch => {
+        conversations.forEach(conversation => {
+            const readMessages = utils.getDataFromLocalStorage(conversation._id.toString());
+            const amountOfUnreadMessages =  conversation.messages.length - readMessages.length;
+            dispatch(receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation));
+        });
+    }
+}
+
+export function countUnreadMessagesByConversation(conversation){
+    console.log(conversation);
+    return dispatch => {
+            const readMessages = utils.getDataFromLocalStorage(conversation._id.toString());
+            const amountOfUnreadMessages =  conversation.messages.length - readMessages.length;
+            dispatch(receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation));
+        };
+}
+
+function initCountUnreadMessagesByConversations(conversations){
+    return {
+        type: types.COUNT_UNREAD_MESSAGES_INIT,
+        conversations
+    }
+    
+}
+
+function receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation){
+    return {
+        type: types.COUNT_UNREAD_MESSAGES_SUCCESS,
+        amountOfUnreadMessages,
+        conversation
+    }
 }

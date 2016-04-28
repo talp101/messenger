@@ -1,4 +1,4 @@
-import {LOAD_CONVERSATIONS, LOAD_CONVERSATIONS_FAIL, LOAD_CONVERSATIONS_SUCCESS} from '../constants/action_types';
+import {LOAD_CONVERSATIONS, LOAD_CONVERSATIONS_FAIL, LOAD_CONVERSATIONS_SUCCESS, COUNT_UNREAD_MESSAGES_SUCCESS} from '../constants/action_types';
 import {orderConversationsByMessagesDate, saveDataToLocalStorage, getDataToLocalStorage} from '../utils/utils';
 
 const initialState = {
@@ -24,7 +24,7 @@ export default function conversations(state = initialState, action) {
             };
         case LOAD_CONVERSATIONS_SUCCESS:
             const newData = orderConversationsByMessagesDate([...state.data, ...action.conversations]);
-            saveDataToLocalStorage('conversations', newData);
+            // saveDataToLocalStorage('conversations', newData);
             return {...state,
                 loading: false,
                 loaded: true,
