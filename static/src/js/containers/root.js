@@ -6,6 +6,7 @@ import IndexPage from '../components/index_page';
 import ConversationFrame from '../components/conversation_frame';
 import configureStore from '../store/configure_store';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import {getDataFromLocalStorage} from '../utils/utils';
 
 
 const initialState = {
@@ -17,7 +18,7 @@ const initialState = {
     },
     conversations: {
         loaded: false,
-        data: []
+        data: getDataFromLocalStorage('conversations')
     }, messages: {
         loaded: false,
         data: {}

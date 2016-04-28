@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 class AppFrame extends Component{
     componentWillMount() {
         const { dispatch, user } = this.props;
-        dispatch(actions.fetchConversations(user._id));
+        dispatch(actions.initConversations(user._id));
     }
     render(){
         const {dispatch, user, conversations} = this.props;

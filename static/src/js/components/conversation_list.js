@@ -1,26 +1,16 @@
 import React, {Component} from 'react'
+import Conversation from './conversation';
 
 class ConversationsList extends Component {
-
     openConversation(event){
-        console.log(event.target);
-        this.context.history.pushState(null, `/conversation/${event.target.id}`);
+        this.context.history.push(`/conversation/${event.target.id}`, null);
     }
+
     render(){
         const {conversations, user, dispatch} = this.props;
-        let conversationsList = conversations.data.map((conversation) => {
+        let conversationsList = conversations.data.map((conversation, index) => {
             return (
-                <li key={conversation._id} id={conversation._id} aria-layout="column" aria-layout-align="end end" className="collection-item avatar" onClick={this.openConversation.bind(this)}>
-                    <i className="material-icons circle messenger-background">face</i>
-                    <div className="conversation-main" aria-layout="column" aria-layout-align="start end">
-                    <span className="title">{conversation.between.filter(user1 => user1._id != user._id)[0].lastName}</span>
-                    <p className="brown-text text-lighten-3" aria-layout="row" aria-layout-align="end end">
-                        {conversation.messages[0].text}
-                    </p>
-                            <a className="secondary-content"><span className="unread-count"></span></a>
-                            <p className="secondary-content conversation-time">{new Date(conversation.messages[0].timestamp).toTimeString().substring(0,5)}</p>
-                    </div>
-                </li>
+                <Conversation key={index} conversation={conversation} openConversation={this.openConversation.bind(this)} current_user={user} />
             )
         });
         

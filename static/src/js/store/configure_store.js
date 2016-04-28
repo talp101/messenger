@@ -16,8 +16,3 @@ export default function configureStore(initialState) {
         )
     )
 }
-//
-// const createStoreWithMiddleware = applyMiddleware(thunk, promiseMiddleware)(createStore);
-// export default function configureStore(initialState) {
-//     return createStoreWithMiddleware(rootReducer, initialState);
-// }
