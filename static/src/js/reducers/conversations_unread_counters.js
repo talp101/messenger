@@ -19,6 +19,7 @@ export default function conversationsUnreadCounters(state = initialState, action
         case COUNT_UNREAD_MESSAGES_SUCCESS:
             let currentConversationsUnreadCounters = state.data;
             currentConversationsUnreadCounters[action.conversation._id] = action.amountOfUnreadMessages;
+            console.log(currentConversationsUnreadCounters);
             return {
                 data: { ...state, ...currentConversationsUnreadCounters }
             };

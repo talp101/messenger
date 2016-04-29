@@ -20,7 +20,6 @@ class ConversationFrame extends Component {
             this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
             this.props.dispatch(actions.countUnreadMessagesByConversations(this.props.conversations.data));
             this.id = this.props.params.conversationId;
-
         }
 
     }
@@ -30,8 +29,8 @@ class ConversationFrame extends Component {
         return (
             <div>
                 {messages.loaded &&
-                    messages.data.messages.map((message) => {
-                        return <li>
+                    messages.data.messages.map((message, index) => {
+                        return <li key={index}>
                             {message.text}
                         </li>
                     })

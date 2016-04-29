@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ConversationContainer from '../containers/conversation_container';
 import * as actions from '../actions/actions';
+import DevTools from '../containers/dev_tools'
 import { connect } from 'react-redux';
 
 
@@ -14,6 +15,7 @@ class AppFrame extends Component{
         const {dispatch, user, conversations, conversationUnreadCounters} = this.props;
         return (
                     <div aria-layout="row" aria-flex aria-layout-fill>
+                        <DevTools />
                         <div aria-layout="column" aria-flex aria-layout-fill className="wrapper">
                             {this.props.children}
                         </div>

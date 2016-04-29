@@ -72,8 +72,6 @@ export function initConversations(userId) {
 }
 
 export function countUnreadMessagesByConversations(conversations){
-    console.log('tal')
-    console.log(conversations);
     return dispatch => {
         conversations.forEach(conversation => {
             const readMessages = utils.getDataFromLocalStorage(conversation._id.toString());
@@ -84,7 +82,6 @@ export function countUnreadMessagesByConversations(conversations){
 }
 
 export function countUnreadMessagesByConversation(conversation){
-    console.log(conversation);
     return dispatch => {
             const readMessages = utils.getDataFromLocalStorage(conversation._id.toString());
             const amountOfUnreadMessages =  conversation.messages.length - readMessages.length;

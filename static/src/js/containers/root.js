@@ -7,6 +7,7 @@ import ConversationFrame from '../components/conversation_frame';
 import configureStore from '../store/configure_store';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import {getDataFromLocalStorage} from '../utils/utils';
+import DevTools from '../containers/dev_tools'
 
 
 const initialState = {
