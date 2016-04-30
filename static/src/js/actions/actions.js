@@ -49,7 +49,7 @@ function receiveMessages(messages) {
 export function login(username, password){
     return dispatch => {
         dispatch(requestLogin())
-        return fetch('/api/login', {
+        return fetch('/api/auth', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

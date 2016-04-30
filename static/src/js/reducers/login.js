@@ -19,6 +19,7 @@ export default function login(state = initialState, action) {
                 loginInfo: state.loginInfo
             };
         case SEND_LOGIN_SUCCESS:
+            // save to localstorage
             return {...state,
                 loading: false,
                 loaded: true,

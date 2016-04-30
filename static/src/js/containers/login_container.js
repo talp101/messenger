@@ -6,10 +6,11 @@ import * as actions from '../actions/actions';
 class LoginContainer extends Component{
     
     handleFormSubmit(username, password) {
-        console.log(username);
-        console.log(password);
-        this.props.dispatch(actions.login(username, password))
+        console.log(this.context);
+        this.props.dispatch(actions.login(username, password));
+        this.context.history.pushState(null, `/`);
     }
+    
     render(){
         const {dispatch} = this.props;
         return (
