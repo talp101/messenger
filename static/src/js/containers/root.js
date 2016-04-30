@@ -4,8 +4,11 @@ import {Provider} from 'react-redux';
 import AppFrame from '../components/app_frame';
 import IndexPage from '../components/index_page';
 import ConversationFrame from '../components/conversation_frame';
+import LoginFrame from '../components/login_frame';
 import configureStore from '../store/configure_store';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import {getDataFromLocalStorage} from '../utils/utils';
+import DevTools from '../containers/dev_tools'
 
 
 const initialState = {
@@ -17,9 +20,13 @@ const initialState = {
     },
     conversations: {
         loaded: false,
-        data: []
-    }, messages: {
+        data: getDataFromLocalStorage('conversations')
+    },
+    messages: {
         loaded: false,
+        data: {}
+    },
+    conversationUnreadCounters: {
         data: {}
     }
 };
@@ -36,6 +43,7 @@ class Root extends Component{
                     <Route path="/" component = {AppFrame}>
                         <IndexRoute component = {IndexPage}/>
                         <Route path="/conversation/:conversationId" component= {ConversationFrame} />
+                        <Route path="/login" component= {LoginFrame} />
                     </Route>
                 </Router>
             </Provider>

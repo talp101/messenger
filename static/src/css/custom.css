@@ -3,7 +3,7 @@
 html{
     height: 100%;
     margin:0;
-    padding:0
+    padding:0;
 }
 
 html, body {
@@ -23,6 +23,8 @@ html, body {
     border-image: -webkit-linear-gradient(left top, rgba(0, 0, 0, 0), #d9d9d9, #d9d9d9, rgba(0, 0, 0, 0)) 1 100%;
     border-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #d9d9d9, #d9d9d9, rgba(0, 0, 0, 0)) 1 100%;
     border-right-width: 0;
+    border: none;
+    border-left-color: lightgrey !important;
     border-left: 2px solid;
 }
 
@@ -161,22 +163,31 @@ html, body {
 }
 /* label focus color */
 .input-field input[type=text]:focus + label {
-    color: #b39ddb;
+    color: #0084ff;
 }
 /* label underline focus color */
 .input-field input[type=text]:focus {
-    border-bottom: 1px solid #b39ddb;
-    box-shadow: 0 1px 0 0 #b39ddb;
-}
+     border-bottom: 1px solid #0084ff;
+     box-shadow: 0 1px 0 0 #0084ff;
+ }
 
 input[type=text]:focus:not([readonly]) {
-    border-bottom: 1px solid #b39ddb;
-    box-shadow: 0 1px 0 0 #b39ddb;
+    border-bottom: 1px solid #0084ff;
+    box-shadow: 0 1px 0 0 #0084ff;
+}
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #0084ff;
+    box-shadow: 0 1px 0 0 #0084ff;
+}
+
+input[type=password]:focus:not([readonly]) {
+    border-bottom: 1px solid #0084ff;
+    box-shadow: 0 1px 0 0 #0084ff;
 }
 
 input[type=number]:focus:not([readonly]) {
-    border-bottom: 1px solid #b39ddb;
-    box-shadow: 0 1px 0 0 #b39ddb;
+    border-bottom: 1px solid #0084ff;
+    box-shadow: 0 1px 0 0 #0084ff;
 }
 
 /* icon prefix focus color */
@@ -377,13 +388,15 @@ input[type=number]:focus:not([readonly]) {
     line-height: normal;
 }
 .conversation-time{
-    left: 40px !important;
-    display: inline-block;
-    top: 57px !important;
+    margin-top: 1em !important;
 }
 
 .messenger-background{
     /*background: #0084ff !important;*/
+    background: linear-gradient(to top, #0084ff, #00C5FF) !important;
+}
+
+.login-background{
     background: linear-gradient(to top, #0084ff, #00C5FF) !important;
 }
 
