@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-class ConversationComponent extends Component {
+class Conversation extends Component {
     render() {
         const {messages, user, dispatch} = this.props;
         const messagesList = messages.data.messages.map((message) => {
@@ -17,4 +17,4 @@ class ConversationComponent extends Component {
     }
 }
 
-export default ConversationComponent;
+export default Conversation;

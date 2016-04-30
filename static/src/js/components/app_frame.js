@@ -23,7 +23,7 @@ class AppFrame extends Component{
                 </div>
                 }
             </div>
-            )}
+        )}
 }
 
 AppFrame.propTypes = {

@@ -13,10 +13,10 @@ import DevTools from '../containers/dev_tools'
 
 const initialState = {
     user: {
-        userName: 'shmulikc',
-        _id: "571cadca72d7a0e01112c80b",
-        firstName: 'שמוליק',
-        lastName: 'ציקושווילי'
+        userName: 'talp',
+        _id: "571dfec763acbb0837b5bc78",
+        firstName: 'טל',
+        lastName: 'פרץ'
     },
     conversations: {
         loaded: false,

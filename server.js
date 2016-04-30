@@ -9,6 +9,9 @@ import messages from './routes/message_router'
 import users from './routes/user_router'
 import auth from './routes/auth_router'
 
+import socketio from 'socket.io';
+//import socketEvents from 'socket/socketEvents';
+
 process.env.MONGOLAB_URI = process.env.MONGOLAB_URI || 'mongodb://localhost/messenger';
 process.env.PORT = process.env.PORT || 3485;
 
@@ -32,8 +35,11 @@ app.get('*' , (request, response) => {
     response.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
-app.listen(process.env.PORT, (err)=>{
+const server = app.listen(process.env.PORT, (err)=>{
     if(err)
         console.log(err);
     console.log('server started at port 3485');
 });
+
+// const io = new socketio(server, { path: '/api/chat' });
+// const socketEvents = socketEvents(io);

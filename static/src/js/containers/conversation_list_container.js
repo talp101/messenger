@@ -1,46 +1,17 @@
 import React, {Component, PropTypes} from 'react';
-import * as actions from '../actions/actions';
-import { connect } from 'react-redux';
-import ConversationComponent from '../components/conversation';
+import ConversationsList from '../components/conversation_list';
 
-class ConversationContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.id = -1;
-    }
 
-    componentWillMount() {
-        const { dispatch, user, messages, params } = this.props;
-        dispatch(actions.fetchMessages(params.conversationId));
-    }
-
-    componentDidUpdate() {
-        if (this.id != this.props.params.conversationId) {
-            this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
-            this.id = this.props.params.conversationId;
-
-        }
-
-    }
-
-    render() {
-        const { dispatch, user, messages } = this.props;
-        console.log(this.props);
+class ConversationListContainer extends Component{
+    render(){
+        const {dispatch, user, conversations, conversationUnreadCounters} = this.props;
         return (
             <div>
-                {
-                    messages.loaded &&
-                        <ConversationComponent messages={messages} user={user} dispatch={dispatch} />
-                }
+                <ConversationsList conversations={conversations} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters} user={user}/>
             </div>
         )
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.user,
-        messages: state.messages
-    }
-}
-export default connect(mapStateToProps)(ConversationContainer);
+export default ConversationListContainer;
+
