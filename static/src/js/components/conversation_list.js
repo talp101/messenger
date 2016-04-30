@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import * as actions from '../actions/actions';
-import Conversation from './conversation';
+import ConversationListItem from './conversation_list_item';
 
 class ConversationsList extends Component {
     openConversation(conversation, event){
@@ -13,7 +13,7 @@ class ConversationsList extends Component {
         const {conversations, user, conversationUnreadCounters, dispatch} = this.props;
         let conversationsList = conversations.data.map((conversation, index) => {
             return (
-                <Conversation key={index} conversation={conversation} openConversation={this.openConversation.bind(this, conversation)} unreadCounter={conversationUnreadCounters.data[conversation._id]} current_user={user} />
+                <ConversationListItem key={index} conversation={conversation} openConversation={this.openConversation.bind(this, conversation)} unreadCounter={conversationUnreadCounters.data[conversation._id]} current_user={user} />
             )
         });
         

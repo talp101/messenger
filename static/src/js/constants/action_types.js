@@ -8,7 +8,7 @@ export const COUNT_UNREAD_MESSAGES_INIT = 'COUNT_UNREAD_MESSAGES_INIT';
 // User actions
 export const SAVE_USER = 'SAVE_USER';
 
-// Conversation actions
+// ConversationListItem actions
 export const LOAD_MESSAGES = 'LOAD_MESSAGES';
 export const LOAD_MESSAGES_SUCCESS = 'LOAD_MESSAGES_SUCCESS';
 export const LOAD_MESSAGES_FAIL = 'LOAD_MESSAGES_FAIL';

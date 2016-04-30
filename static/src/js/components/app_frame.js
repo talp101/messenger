@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ConversationContainer from '../containers/conversation_container';
+import ConversationListContainer from '../containers/conversation_list_container';
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
 
@@ -19,7 +19,7 @@ class AppFrame extends Component{
                 </div>
                 {conversations.data.length > 0 &&
                 <div aria-layout="column" dir="rtl" aria-flex="25" aria-layout-fill aria-layout-align="start end">
-                    <ConversationContainer conversations={conversations} user={user} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters}/>
+                    <ConversationListContainer conversations={conversations} user={user} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters}/>
                 </div>
                 }
             </div>

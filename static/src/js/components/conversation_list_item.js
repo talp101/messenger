@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Conversation extends Component{
+class ConversationListItem extends Component{
     constructor(props){
         super(props);
     }
@@ -27,4 +27,4 @@ class Conversation extends Component{
     }
 }
 
-export default Conversation;
+export default ConversationListItem;

@@ -4,7 +4,7 @@ import ConversationsList from '../components/conversation_list';
 import SearchPanel from '../components/search_panel';
 
 
-class ConversationContainer extends Component{
+class ConversationListContainer extends Component{
     render(){
         const {dispatch, user, conversations, conversationUnreadCounters} = this.props;
         return (
@@ -15,4 +15,4 @@ class ConversationContainer extends Component{
     }
 }
 
-export default ConversationContainer;
+export default ConversationListContainer;
