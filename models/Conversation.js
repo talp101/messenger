@@ -7,4 +7,4 @@ const conversationSchema = mongoose.Schema({
     between: [{type:mongoose.Schema.Types.ObjectId, ref:'User'}]
 });
 
-export default mongoose.model('ConversationListItem', conversationSchema);
+export default mongoose.model('Conversation', conversationSchema);
