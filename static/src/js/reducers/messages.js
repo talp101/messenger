@@ -1,4 +1,4 @@
-import {LOAD_MESSAGES, LOAD_MESSAGES_FAIL, LOAD_MESSAGES_SUCCESS, SEND_MESSAGE} from '../constants/action_types';
+import {LOAD_MESSAGES, LOAD_MESSAGES_FAIL, LOAD_MESSAGES_SUCCESS, SEND_MESSAGE, SEND_MESSAGE_SUCCESS} from '../constants/action_types';
 
 const initialState = {
     loaded: false,
@@ -33,6 +33,15 @@ export default function messages(state = initialState, action) {
                 loading: false,
                 loaded: true,
                 data: action.messages
+            };
+        case SEND_MESSAGE_SUCCESS:
+            console.log('SEND MESSAGE SUCCESS ');
+            console.log(action);
+            return {
+                ...state,
+                loading: false,
+                loaded: true,
+                data: action.conversation
             };
         default:
             return state;

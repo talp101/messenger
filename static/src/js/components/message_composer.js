@@ -11,7 +11,7 @@ class MessageComposer extends Component {
                         <div class="input-field col s12">
                             <textarea id="textarea1" className="materialize-textarea"/>
                             <label for="textarea1">כתוב הודעה</label>
-                            <i onClick={sendMessage.bind(this, $('#textarea1').val(), user._id, params.conversationId)} className="material-icons dp48">play_arrow</i>
+                            <i onClick={sendMessage.bind(this, $('#textarea1').val(), params.conversationId, user._id)} className="material-icons dp48">play_arrow</i>
                         </div>
                     </div>
                 </form>

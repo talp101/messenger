@@ -6,7 +6,9 @@ export function fetchConversations(user) {
         return fetch(`/api/users/${user}/conversations/`)
             .then(response => response.json())
             .then(conversations => dispatch(receiveConversations(conversations)))
-            .catch(error => {throw error});
+            .catch(error => {
+                throw error
+            });
     }
 }
 
@@ -29,7 +31,9 @@ export function fetchMessages(conversationId) {
         return fetch(`/api/conversations/${conversationId}`)
             .then(response => response.json())
             .then(messages => dispatch(receiveMessages(messages)))
-            .catch(error => {throw error});
+            .catch(error => {
+                throw error
+            });
     }
 }
 
@@ -43,6 +47,13 @@ function receiveMessages(messages) {
     return {
         type: types.LOAD_MESSAGES_SUCCESS,
         messages
+    }
+}
+
+function sendMessageCompleted(conversation) {
+    return {
+        type: types.SEND_MESSAGE_SUCCESS,
+        conversation
     }
 }
 
@@ -62,6 +73,9 @@ export function sendMessage(conversationId, userId, text) {
             },
             body: JSON.stringify(messageRequestBody)
         }).then(response => response.json())
-        .catch(error => { throw error; });
+            .then(conversation => dispatch(sendMessageCompleted(conversation)))
+            .catch(error => {
+                throw error;
+            });
     }
 }
