@@ -15,7 +15,9 @@ class Conversation extends Component{
                 <p className="brown-text text-lighten-3" aria-layout="row" aria-layout-align="end end">
                     {conversation.messages[0].text}
                 </p>
-                <a className="secondary-content"><span className="unread-count">{(unreadCounter === 0) ? '' : unreadCounter}</span></a>
+                {unreadCounter > 0 &&
+                <a className="secondary-content"><span className="unread-count">{unreadCounter}</span></a>
+                }
                 <p className="secondary-content conversation-time">{new Date(conversation.messages[0].timestamp).toTimeString().substring(0,5)}</p>
             </div>
         </li>

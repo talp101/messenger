@@ -13,7 +13,7 @@ export function saveDataToLocalStorage(localStorageKey, data){
 
 export function getDataFromLocalStorage(localStorageKey){
     const data =  JSON.parse(localStorage.getItem(localStorageKey));
-    if (data === null){
+    if (data === null || data === undefined){
         return []
     }
     else

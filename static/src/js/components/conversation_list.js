@@ -5,11 +5,12 @@ import Conversation from './conversation';
 class ConversationsList extends Component {
     openConversation(conversation, event){
         const {dispatch} = this.props;
+        console.log('dispatching');
         dispatch(actions.countUnreadMessagesByConversation(conversation));
+        console.log('after dispatch');
         this.context.history.push(`/conversation/${event.target.id}`, null);
         
     }
-
     render(){
         const {conversations, user, conversationUnreadCounters, dispatch} = this.props;
         let conversationsList = conversations.data.map((conversation, index) => {

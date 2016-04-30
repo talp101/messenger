@@ -11,14 +11,12 @@ class ConversationFrame extends Component {
     componentWillMount() {
         const { dispatch, user, messages, params, conversations } = this.props;
         dispatch(actions.fetchMessages(params.conversationId));
-        dispatch(actions.countUnreadMessagesByConversations(conversations.data));
 
     }
 
     componentDidUpdate() {
         if (this.id != this.props.params.conversationId){
             this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
-            this.props.dispatch(actions.countUnreadMessagesByConversations(this.props.conversations.data));
             this.id = this.props.params.conversationId;
         }
 

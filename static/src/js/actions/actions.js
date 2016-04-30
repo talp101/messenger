@@ -84,8 +84,12 @@ export function countUnreadMessagesByConversations(conversations){
 export function countUnreadMessagesByConversation(conversation){
     return dispatch => {
             const readMessages = utils.getDataFromLocalStorage(conversation._id.toString());
-            const amountOfUnreadMessages =  conversation.messages.length - readMessages.length;
-            dispatch(receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation));
+            if(readMessages.length === 0)
+                dispatch(receiveCountUnreadMessagesByConversation(0, conversation));
+            else {
+                const amountOfUnreadMessages = conversation.messages.length - readMessages.length;
+                dispatch(receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation));
+            }
         };
 }
 
