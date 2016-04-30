@@ -45,3 +45,23 @@ function receiveMessages(messages) {
         messages
     }
 }
+
+export function sendMessage(conversationId, userId, text) {
+    let messageRequestBody = {
+        userId: userId,
+        conversationId: conversationId,
+        text: 'hi'
+    };
+
+    let data = new FormData();
+    data.append( "json", JSON.stringify( messageRequestBody ) );
+
+    console.log('message ' + messageRequestBody.conversationId);
+    return dispatch => {
+        return fetch(`/api/messages`, {
+            method: 'POST',
+            body: data
+        }).then(response => response.json())
+        .catch(error => { throw error; });
+    }
+}
