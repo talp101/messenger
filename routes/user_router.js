@@ -26,10 +26,8 @@ router.route('/')
 
 router.route('/:userId/conversations')
     .get(function(req, res, next){
-        console.log(req.params.userId);
         Conversation.find({between: req.params.userId}).populate('between').populate({path:'messages', options:{sort:{"timestamp":-1}}}).exec(function(err, converstaions){
             if(err) res.send(err);
-            console.log(converstaions);
             res.json(converstaions);
         });
     });
