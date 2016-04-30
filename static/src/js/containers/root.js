@@ -14,7 +14,7 @@ import DevTools from '../containers/dev_tools'
 const initialState = {
     user: {
         userName: 'talp',
-        _id: "571ca5f1d5df12612151e361",
+        _id: "571dfec763acbb0837b5bc78",
         firstName: 'טל',
         lastName: 'פרץ'
     },
@@ -30,6 +30,7 @@ const initialState = {
         data: {}
     }
 };
+
 
 const store = configureStore(initialState);
 

@@ -1,7 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import * as actions from '../actions/actions';
 import ConversationsList from '../components/conversation_list';
-import SearchPanel from '../components/search_panel';
 
 
 class ConversationListContainer extends Component{
@@ -16,3 +14,4 @@ class ConversationListContainer extends Component{
 }
 
 export default ConversationListContainer;
+

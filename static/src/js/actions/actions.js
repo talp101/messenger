@@ -140,3 +140,33 @@ function receiveLoginInfo(loginInfo){
         loginInfo
     }
 }
+
+function sendMessageCompleted(conversation) {
+    return {
+        type: types.SEND_MESSAGE_SUCCESS,
+        conversation
+    }
+}
+
+export function sendMessage(conversationId, userId, text) {
+    let messageRequestBody = {
+        userId: userId,
+        conversationId: conversationId,
+        text: 'hi'
+    };
+
+    return dispatch => {
+        return fetch(`/api/messages`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(messageRequestBody)
+        }).then(response => response.json())
+            .then(conversation => dispatch(sendMessageCompleted(conversation)))
+            .catch(error => {
+                throw error;
+            });
+    }
+}
