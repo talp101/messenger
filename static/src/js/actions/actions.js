@@ -108,3 +108,35 @@ function receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conver
         conversation
     }
 }
+
+export function login(username, password){
+    return dispatch => {
+        dispatch(requestLogin())
+        return fetch('/api/auth', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        }).then(response => response.json())
+            .then(loginInfo=>dispatch(receiveLoginInfo(loginInfo)))
+            .catch(error=>{throw error})
+    }
+}
+
+function requestLogin(){
+    return {
+        type: types.SEND_LOGIN
+    }
+}
+
+function receiveLoginInfo(loginInfo){
+    return {
+        type: types.SEND_LOGIN_SUCCESS,
+        loginInfo
+    }
+}

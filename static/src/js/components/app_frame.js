@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import ConversationContainer from '../containers/conversation_container';
 import * as actions from '../actions/actions';
-import DevTools from '../containers/dev_tools'
 import { connect } from 'react-redux';
 
 
@@ -14,16 +13,16 @@ class AppFrame extends Component{
     render(){
         const {dispatch, user, conversations, conversationUnreadCounters} = this.props;
         return (
-                    <div aria-layout="row" aria-flex aria-layout-fill>
-                        <DevTools />
-                        <div aria-layout="column" aria-flex aria-layout-fill className="wrapper">
-                            {this.props.children}
-                        </div>
-                        {conversations.data.length > 0 &&
-                            <ConversationContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch}/>
-                        }
-                        
-                    </div>
+            <div aria-layout="row"  aria-layout-fill aria-layout-align="start start">
+                <div aria-layout="column" aria-flex aria-layout-fill aria-layout-align="center center" className="h-f-s">
+                    {this.props.children}
+                </div>
+                {conversations.data.length > 0 &&
+                <div aria-layout="column" dir="rtl" aria-flex="25" aria-layout-fill aria-layout-align="start end">
+                    <ConversationContainer conversations={conversations} user={user} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters}/>
+                </div>
+                }
+            </div>
             )}
 }
 
