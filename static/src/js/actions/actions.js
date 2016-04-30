@@ -53,14 +53,14 @@ export function sendMessage(conversationId, userId, text) {
         text: 'hi'
     };
 
-    let data = new FormData();
-    data.append( "json", JSON.stringify( messageRequestBody ) );
-
-    console.log('message ' + messageRequestBody.conversationId);
     return dispatch => {
         return fetch(`/api/messages`, {
             method: 'POST',
-            body: data
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(messageRequestBody)
         }).then(response => response.json())
         .catch(error => { throw error; });
     }
