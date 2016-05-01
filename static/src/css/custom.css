@@ -396,6 +396,10 @@ input[type=number]:focus:not([readonly]) {
     background: linear-gradient(to top, #0084ff, #00C5FF) !important;
 }
 
+.messenger-title-color{
+    color: #0084ff;
+}
+
 .login-background{
     background: linear-gradient(to top, #0084ff, #00C5FF) !important;
 }

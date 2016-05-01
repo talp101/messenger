@@ -6,14 +6,14 @@ import MenuListContainer from './menu_list';
 
 class Menu extends Component{
     render(){
-        const {user} = this.props;
+        const {conversations, user, conversationUnreadCounters, dispatch, contacts} = this.props;
         return(
-            <div>
+            <ul className="right side-nav fixed contacts_menu" aria-layout-fill>
                 <AppLogo />
                 <UserWelcome user={user} />
-                <SearchPanel />
-                <MenuListContainer />
-            </div>
+                <SearchPanel dispatch={dispatch} user={user}/>
+                <MenuListContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} contacts={contacts} />
+            </ul>
         )
     }
 }

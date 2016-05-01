@@ -13,15 +13,23 @@ router.route('/')
         })
     })
     .post(function(req, res, next){
-        let user = new User();
-        user.userName = req.body.userName;
-        user.firstName = req.body.firstName;
-        user.lastName = req.body.lastName;
-        user.save(function(err){
-            if(err)
-                res.send(err);
-            res.json(user);
-        });
+        User.findOne({userName: req.body.userName}).exec((err, user) => {
+            if(user !== null){
+                res.json(user);
+            }
+            else{
+                let newUser = new User();
+                newUser.userName = req.body.userName;
+                newUser.firstName = req.body.firstName;
+                newUser.lastName = req.body.lastName;
+                newUser.save(function(err){
+                    if(err)
+                        res.send(err);
+                    res.json(newUser);
+                });
+            }
+        })
+
     });
 
 router.route('/:userId/conversations')

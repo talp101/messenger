@@ -28,6 +28,10 @@ const initialState = {
     },
     conversationUnreadCounters: {
         data: {}
+    },
+    contacts:{
+        loaded: false,
+        data: []
     }
 };
 

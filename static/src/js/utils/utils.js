@@ -1,5 +1,6 @@
 export function orderConversationsByMessagesDate(conversations){
-    return conversations.sort(conversationComparator);
+    //return conversations.sort(conversationComparator);
+    return conversations;
 
 }
 

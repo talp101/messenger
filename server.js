@@ -7,6 +7,7 @@ import path from 'path';
 import conversations from './routes/converation_router'
 import messages from './routes/message_router'
 import users from './routes/user_router'
+import contacts from './routes/contact_router'
 import auth from './routes/auth_router'
 
 import socketio from 'socket.io';
@@ -28,6 +29,7 @@ app.use('/static', express.static('static'));
 app.use('/api/conversations', conversations);
 app.use('/api/users', users);
 app.use('/api/messages', messages);
+app.use('/api/contacts', contacts);
 app.use('/api/auth', auth);
 
 app.get('*' , (request, response) => {

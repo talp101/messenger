@@ -31,6 +31,7 @@ function receiveConversations(conversations) {
             conversations
         }
 }
+
 export function fetchMessages(conversationId) {
     return dispatch => {
         dispatch(requestMessages())
@@ -174,5 +175,94 @@ export function getSocketMessage(msg) {
     return {
         type: types.LOAD_SOCKET_MESSAGE,
         msg
+    }
+}
+
+export function fetchContactsByQueryAndCurrentUser(query, user) {
+    return (dispatch, getState) => {
+        if(query.length > 3){
+            dispatch(requestContacts());
+            return fetch(`/api/contacts?q=${query}`)
+                .then(response => response.json())
+                .then(contacts => {
+                    dispatch(receiveContacts(contacts.filter(contact => contact.userName!=user.userName)))
+                })
+                .catch(error => {throw error});
+        }
+        else{
+            dispatch(receiveContacts([]));
+        }
+
+    }
+}
+
+function requestContacts() {
+    return {
+        type: types.LOAD_CONTACTS
+    }
+}
+
+function receiveContacts(contacts) {
+    return  {
+        type: types.LOAD_CONTACTS_SUCCESS,
+        contacts
+    }
+}
+
+
+function createConversationWithUserId(currentUserId, userId) {
+    const newConversation = {
+        between: [currentUserId, userId]
+    };
+
+    return dispatch => {
+        return fetch(`/api/conversations`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newConversation)
+        }).then(response => response.json())
+            .then(conversation => dispatch(createConversationWithUserIdCompleted(conversation, currentUserId)))
+            .catch(error => {
+                throw error;
+            });
+    }
+}
+
+function createNewUserFromContactCompleted(newUser, currentUser) {
+    return dispatch => {
+        dispatch(createConversationWithUserId(newUser._id, currentUser._id))
+    }
+}
+
+function createConversationWithUserIdCompleted(conversation, currentUserId){
+    return dispatch => {
+        dispatch(fetchConversations(currentUserId));    
+    }
+    
+}
+
+export function createNewUserFromContact(contact, currentUser){
+    const newContact = {
+        userName: contact.userName,
+        firstName: 'tal',
+        lastName:'בוט'
+    };
+
+    return dispatch => {
+        return fetch(`/api/users`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newContact)
+        }).then(response => response.json())
+            .then(newUser => dispatch(createNewUserFromContactCompleted(newUser, currentUser)))
+            .catch(error => {
+                throw error;
+            });
     }
 }

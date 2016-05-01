@@ -11,8 +11,6 @@ class ConversationsList extends Component {
     }
     render(){
         const {conversations, user, conversationUnreadCounters, dispatch} = this.props;
-        console.log('conversations list');
-        console.log(conversations);
         let conversationsList = conversations.data.map((conversation, index) => {
             return (
                 <ConversationListItem key={index} conversation={conversation} openConversation={this.openConversation.bind(this, conversation)} unreadCounter={conversationUnreadCounters.data[conversation._id]} current_user={user} />
@@ -20,24 +18,12 @@ class ConversationsList extends Component {
         });
         
         return (
-            <ul className="right side-nav fixed contacts_menu" aria-layout-fill>
-                <li className="messenger-background white-text w-full h-xs" aria-layout="row" aria-layout-align="center center">
-                    <span className="white-text text-1-5x m-l">Messenger</span>
-                </li>
-                <li aria-layout="column" className="wrapper w-full" aria-layout-align="center center">
-                    <div aria-layout="row" aria-layout-align="center center">
-                        <span className="brown-text text-lighten-4 text-1-5x">היי {user.lastName}</span>
-                    </div>
-                </li>
                 <li aria-layout="column" className="m-t-n w-full">
-                    <div aria-layout="row" aria-layout-align="center center">
-                        <span className="brown-text text-lighten-3">תתחיל לשלוח הודעות בכיף</span>
-                    </div>
+                    <h5 className="messenger-title-color">צ׳אטים</h5>
                     <ul className="collection">
                         {conversationsList}
                     </ul>
                 </li>
-            </ul>
         )
     }
 }
