@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import * as actions from '../actions/actions';
 import ConversationListItem from './conversation_list_item';
+import SearchPanel from './search_panel';
 
 class ConversationsList extends Component {
     openConversation(conversation, event){
@@ -27,10 +28,12 @@ class ConversationsList extends Component {
                         <span className="brown-text text-lighten-4 text-1-5x">היי {user.lastName}</span>
                     </div>
                 </li>
-                <li aria-layout="column" className="m-t-n w-full">
+                <li aria-layout="column" className="wrapper w-full" aria-layout-align="center center">
                     <div aria-layout="row" aria-layout-align="center center">
-                        <span className="brown-text text-lighten-3">תתחיל לשלוח הודעות בכיף</span>
+                        <SearchPanel />
                     </div>
+                </li>
+                <li aria-layout="column" className="m-t-n w-full">
                     <ul className="collection">
                         {conversationsList}
                     </ul>

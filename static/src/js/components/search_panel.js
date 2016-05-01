@@ -16,10 +16,16 @@ class SearchPanel extends Component{
         const { dispatch} = this.props;
         return (
             <div>
-                <input type="text" value={this.state.query} onChange={::this.handleChange}/>
+                <div>
+                    <input id="search" type="text" value={this.state.query} onChange={this.handleChange.bind(this)} placeholder="חפש..."/>
+                </div>
+                <div>
+                    <p>{this.state.query}</p>
+                </div>
             </div>
         )
     }
 }
 
-export default SearchPanel
+export default SearchPanel;
+

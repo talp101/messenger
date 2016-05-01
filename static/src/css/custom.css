@@ -192,7 +192,7 @@ input[type=number]:focus:not([readonly]) {
 
 /* icon prefix focus color */
 .input-field .prefix.active {
-    color: #b39ddb;
+    color: lightgrey;
 }
 
 /* label focus color */
@@ -419,4 +419,10 @@ input[type=number]:focus:not([readonly]) {
 .messenger-logo {
     margin-right: 20em;
     margin-top:3em;
+}
+
+.input-field .prefix ~ input, .input-field .prefix ~ textarea {
+    margin-left: 3rem;
+    width: 92%;
+    /* width: calc(100% - 3rem); */
 }
