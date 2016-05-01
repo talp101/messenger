@@ -23,7 +23,7 @@ export default function conversations(state = initialState, action) {
                 data: [...state.data]
             };
         case LOAD_CONVERSATIONS_SUCCESS:
-            const newData = orderConversationsByMessagesDate([...state.data, ...action.conversations]);
+            const newData = orderConversationsByMessagesDate(action.conversations);
             // saveDataToLocalStorage('conversations', newData);
             return {...state,
                 loading: false,

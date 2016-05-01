@@ -36,7 +36,7 @@ export function fetchMessages(conversationId) {
         dispatch(requestMessages())
         return fetch(`/api/conversations/${conversationId}`)
             .then(response => response.json())
-            .then(messages => dispatch(receiveMessages(messages, conversationId)))
+            .then(conversation => dispatch(receiveMessages(conversation)))
             .catch(error => {throw error});
     }
 }
@@ -47,11 +47,10 @@ function requestMessages() {
     }
 }
 
-function receiveMessages(messages, conversationId) {
+function receiveMessages(conversation) {
     return {
         type: types.LOAD_MESSAGES_SUCCESS,
-        messages,
-        conversationId
+        conversation
     }
 }
 
@@ -152,7 +151,7 @@ export function sendMessage(conversationId, userId, text) {
     let messageRequestBody = {
         userId: userId,
         conversationId: conversationId,
-        text: 'hi'
+        text: text
     };
 
     return dispatch => {
@@ -168,5 +167,12 @@ export function sendMessage(conversationId, userId, text) {
             .catch(error => {
                 throw error;
             });
+    }
+}
+
+export function getSocketMessage(msg) {
+    return {
+        type: types.LOAD_SOCKET_MESSAGE,
+        msg
     }
 }

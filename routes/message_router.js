@@ -5,7 +5,6 @@ import Message from '../models/Message';
 import Conversation from '../models/Conversation';
 
 router.post('/', function (req, res, next) {
-    console.log(req.body);
     let conversationId = req.body.conversationId;
     let userId = req.body.userId;
 

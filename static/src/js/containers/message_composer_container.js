@@ -9,8 +9,18 @@ class MessageComposerContainer extends Component {
     }
 
     sendMessageDispatch(text, conversationId, userId) {
-        const { dispatch } = this.props;
-        console.log('text is: ' + text + ' conversationId: ' + conversationId + ' userId: ' + userId);
+        const { dispatch, socket } = this.props;
+
+        let newMessage = {
+            userId: userId,
+            conversationId: conversationId,
+            text: text
+        };
+        console.log('sending message to server');
+        console.log(newMessage);
+        socket.emit('new message', newMessage);
+        console.log('finished emit');
+
         dispatch(actions.sendMessage(conversationId, userId, text));
     }
 
@@ -18,7 +28,7 @@ class MessageComposerContainer extends Component {
         const { dispatch, user, params } = this.props;
 
         return (
-            <MessageComposer params={this.props.params} user={user} sendMessage={this.sendMessageDispatch.bind(this)} />
+            <MessageComposer params={this.props.params} user={user} sendMessage={this.sendMessageDispatch.bind(this)}/>
         )
     }
 }

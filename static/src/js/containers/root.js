@@ -14,7 +14,7 @@ import DevTools from '../containers/dev_tools'
 const initialState = {
     user: {
         userName: 'talp',
-        _id: "571ca5f1d5df12612151e361",
+        _id: "571cadca72d7a0e01112c80b",
         firstName: 'טל',
         lastName: 'פרץ'
     },
@@ -22,7 +22,7 @@ const initialState = {
         loaded: false,
         data: getDataFromLocalStorage('conversations')
     },
-    messages: {
+    conversation: {
         loaded: false,
         data: {}
     },

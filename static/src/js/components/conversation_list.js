@@ -11,6 +11,8 @@ class ConversationsList extends Component {
     }
     render(){
         const {conversations, user, conversationUnreadCounters, dispatch} = this.props;
+        console.log('conversations list');
+        console.log(conversations);
         let conversationsList = conversations.data.map((conversation, index) => {
             return (
                 <ConversationListItem key={index} conversation={conversation} openConversation={this.openConversation.bind(this, conversation)} unreadCounter={conversationUnreadCounters.data[conversation._id]} current_user={user} />

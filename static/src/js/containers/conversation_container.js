@@ -11,7 +11,19 @@ class ConversationContainer extends Component {
     }
 
     componentWillMount() {
-        const {dispatch, user, messages, params} = this.props;
+        const {dispatch, user, conversation, params, socket } = this.props;
+        let self = this;
+        socket.on('new socket server', function (msg) {
+            console.log('got message');
+            console.log(msg);
+
+            if(msg.conversationId == params.conversationId) {
+                dispatch(actions.getSocketMessage(msg));
+                dispatch(actions.fetchConversations(user._id));
+                self.forceUpdate();
+            }
+        });
+
         dispatch(actions.fetchMessages(params.conversationId));
     }
 
@@ -22,15 +34,14 @@ class ConversationContainer extends Component {
         }
     }
 
-
     render() {
-        const {dispatch, user, messages} = this.props;
-        console.log(this.props);
+        const {dispatch, user, conversation} = this.props;
+        console.log(this.props.conversation);
         return (
             <div>
                 {
-                    messages.loaded &&
-                    <Conversation messages={messages} user={user} dispatch={dispatch}/>
+                    conversation.loaded &&
+                    <Conversation conversation={conversation} user={user} dispatch={dispatch}/>
                 }
 
             </div>
@@ -42,7 +53,7 @@ class ConversationContainer extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        messages: state.messages
+        conversation: state.conversation
     }
 }
 
