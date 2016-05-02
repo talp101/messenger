@@ -9,7 +9,7 @@ const socket = io('', { path: '/api/chat' });
 class ConversationFrame extends Component {
     render() {
         return (
-            <div>
+            <div className="full-div">
                 <ConversationContainer params={this.props.params} socket={socket} />
                 <MessageComposerContainer params={this.props.params} socket={socket} />
             </div>
