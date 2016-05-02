@@ -19,7 +19,6 @@ class ConversationsList extends Component {
         
         return (
                 <li aria-layout="column" className="m-t-n w-full">
-                    <h5 className="messenger-title-color">צ׳אטים</h5>
                     <ul className="collection">
                         {conversationsList}
                     </ul>

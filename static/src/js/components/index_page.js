@@ -1,16 +1,18 @@
-
 import React, {Component, PropTypes} from 'react';
 
 class IndexPage extends Component{
     render(){
         return (
-            <div className="index-page-wrapper" aria-layout="column" aria-fill-layout aria-flex="75">
-                <h1 className="index-title">פשוט לדבר</h1>
-                <img height="25%" width="25%" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Facebook_Messenger_logo.svg/2000px-Facebook_Messenger_logo.svg.png" className="responsive-img messenger-logo"/>
+        <div className="light-grey wrapper">
+            <h2 className="m-t-sm padder center">פשוט לדבר</h2>
+            <div className="center padder">
+                <div className="container">
+                    <img height="25%" width="25%" src="/static/src/img/Facebook_Messenger_logo.svg.png" className="responsive-img"/>
+                </div>
             </div>
-
+        </div>
         )
     }
 }
 
-export default IndexPage
+export default IndexPage;
