@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-const users = [{userName:'amitn', firstName:'עמית', lastName:'נאמן'},{userName:'israelc', firstName:'ישראל', lastName:'כהן'}, {userName:'goidel', firstName:'גבריאל', lastName:'גוידל'}];
+const users = [{userName:'meravi', firstName:'מרבי', lastName:'ציקשווילי'},{userName:'amitn', firstName:'עמית', lastName:'נאמן'},{userName:'israelc', firstName:'ישראל', lastName:'כהן'}, {userName:'goidel', firstName:'גבריאל', lastName:'גוידל'}];
 
 router.route('/')
     .get(function (req, res, next){
