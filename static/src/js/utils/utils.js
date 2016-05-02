@@ -20,3 +20,27 @@ export function getDataFromLocalStorage(localStorageKey){
     else
         return data;
 }
+
+
+export function setToken(token) {
+    if (token)
+        localStorage.setItem('token', token);
+    else
+        localStorage.removeItem('token');
+}
+
+
+export function getToken() {
+    return localStorage.getItem('token')
+}
+
+export function setCurrentUser(user) {
+    if (user)
+        localStorage.setItem('user', JSON.stringify(user));
+    else
+        localStorage.removeItem('user');
+}
+
+export function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'));
+}

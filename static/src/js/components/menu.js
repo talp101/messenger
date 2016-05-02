@@ -10,9 +10,10 @@ class Menu extends Component{
         return(
             <ul className="right side-nav fixed contacts_menu" aria-layout-fill>
                 <AppLogo />
-                <UserWelcome user={user} />
-                <SearchPanel dispatch={dispatch} user={user}/>
-                <MenuListContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} contacts={contacts}/>
+                {user._id && <UserWelcome user={user} />}
+                {user._id && <SearchPanel dispatch={dispatch} user={user}/>}
+                {user._id && <MenuListContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} contacts={contacts}/>}
+
             </ul>
         )
     }

@@ -1,4 +1,5 @@
 import {SEND_LOGIN, SEND_LOGIN_FAIL, SEND_LOGIN_SUCCESS} from '../constants/action_types';
+import * as utils from '../utils/utils';
 
 const initialState = {
     loaded: false,
@@ -19,8 +20,9 @@ export default function login(state = initialState, action) {
                 loginInfo: state.loginInfo
             };
         case SEND_LOGIN_SUCCESS:
-            // save to localstorage
-            return {...state,
+            utils.setToken(action.loginInfo.token);
+            utils.setCurrentUser(action.loginInfo.user);
+            return {
                 loading: false,
                 loaded: true,
                 loginInfo: action.loginInfo

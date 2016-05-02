@@ -6,8 +6,7 @@ import * as actions from '../actions/actions';
 class LoginContainer extends Component{
     
     handleFormSubmit(username, password) {
-        this.props.dispatch(actions.login(username, password));
-        this.context.history.pushState(null, `/`);
+        this.props.dispatch(actions.login(username, password, this.context.router));
     }
     
     render(){
@@ -24,5 +23,10 @@ class LoginContainer extends Component{
         )
     }
 }
+
+
+LoginContainer.contextTypes = {
+    router: React.PropTypes.object
+};
 
 export default LoginContainer;
