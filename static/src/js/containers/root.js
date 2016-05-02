@@ -7,16 +7,16 @@ import ConversationFrame from '../components/conversation_frame';
 import LoginFrame from '../components/login_frame';
 import configureStore from '../store/configure_store';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import {getDataFromLocalStorage} from '../utils/utils';
+import {getDataFromLocalStorage, getToken} from '../utils/utils';
 import DevTools from '../containers/dev_tools'
 
 
 const initialState = {
     user: {
-        userName: 'talp',
-        _id: "571ca5f1d5df12612151e361",
-        firstName: 'טל',
-        lastName: 'פרץ'
+        userName: '',
+        _id: '',
+        firstName:'',
+        lastName:''
     },
     conversations: {
         loaded: false,
@@ -32,6 +32,10 @@ const initialState = {
     contacts:{
         loaded: false,
         data: []
+    },
+    login:{
+        loaded: false,
+        loginInfo:{token: getToken()}
     }
 };
 

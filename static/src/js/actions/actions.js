@@ -34,7 +34,7 @@ function receiveConversations(conversations) {
 
 export function fetchMessages(conversationId) {
     return dispatch => {
-        dispatch(requestMessages())
+        dispatch(requestMessages());
         return fetch(`/api/conversations/${conversationId}`)
             .then(response => response.json())
             .then(conversation => dispatch(receiveMessages(conversation)))
@@ -111,9 +111,8 @@ function receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conver
     }
 }
 
-export function login(username, password){
+export function login(username, password, router=null){
     return dispatch => {
-        dispatch(requestLogin())
         return fetch('/api/auth', {
             method: 'POST',
             headers: {
@@ -125,7 +124,7 @@ export function login(username, password){
                 password: password
             })
         }).then(response => response.json())
-            .then(loginInfo=>dispatch(receiveLoginInfo(loginInfo)))
+            .then(loginInfo=>dispatch(receiveLoginInfoAndSaveUser(loginInfo, loginInfo.user, router)))
             .catch(error=>{throw error})
     }
 }
@@ -140,6 +139,23 @@ function receiveLoginInfo(loginInfo){
     return {
         type: types.SEND_LOGIN_SUCCESS,
         loginInfo
+    }
+}
+
+function receiveLoginInfoAndSaveUser(loginInfo, user, router=null) {
+    return [
+        receiveLoginInfo(loginInfo),
+        saveUser(user, router)
+    ]
+}
+
+export function saveUser(user, router=null) {
+    if(router) {
+        router.push('/', null);
+    }
+    return {
+        type: types.SAVE_USER,
+        user
     }
 }
 
@@ -266,8 +282,8 @@ function createConversationWithUserIdCompleted(conversation, currentUserId, hist
 export function createNewUserFromContact(contact, currentUser, history){
     const newContact = {
         userName: contact.userName,
-        firstName: 'tal',
-        lastName:'בוט'
+        firstName: contact.firstName,
+        lastName:contact.lastName
     };
 
     return dispatch => {

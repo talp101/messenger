@@ -8,7 +8,7 @@ class LoginFrame extends Component {
         const {dispatch, user}  = this.props;
         return (
             <div>
-                <LoginContainer dispatch={dispatch} user={user}/>
+                <LoginContainer dispatch={dispatch} user={user} />
             </div>
         )
     }

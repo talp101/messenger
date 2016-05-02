@@ -1,15 +1,18 @@
 import React, {Component, PropTypes} from 'react';
-//import ConversationListContainer from '../containers/conversation_list_container';
 import Menu from './menu';
 import * as actions from '../actions/actions';
 import { connect } from 'react-redux';
+import * as utils from '../utils/utils';
 
 
 
 class AppFrame extends Component{
-    componentWillMount() {
-        const { dispatch, user } = this.props;
-        dispatch(actions.initConversations(user._id));
+    componentWillMount(){
+        const {dispatch} = this.props;
+        const user = utils.getCurrentUser();
+        if(user){
+            dispatch(actions.saveUser(user));
+        }
     }
     render(){
         const {dispatch, user, conversations, conversationUnreadCounters, contacts} = this.props;
@@ -34,7 +37,7 @@ function mapStateToProps(state) {
         conversations: state.conversations,
         conversationUnreadCounters: state.conversationUnreadCounters,
         user: state.user,
-        contacts: state.contacts,
+        contacts: state.contacts
     }
 }
 export default connect(mapStateToProps)(AppFrame);
