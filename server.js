@@ -36,7 +36,7 @@ app.get('*' , (request, response) => {
     response.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
-const server = app.listen(process.env.PORT, (err)=>{
+const server = app.listen(process.env.PORT,'0.0.0.0', (err)=>{
     if(err)
         console.log(err);
     console.log('server started at port 3485');

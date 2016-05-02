@@ -3,8 +3,7 @@ import React, {Component} from 'react'
 class MessageComponent extends Component {
     render() {
         const {message, user} = this.props;
-
-        if(message.user[0]._id == user._id) {
+        if(message.user[0] !== user._id) {
             return <div className="row">
                 <div className="col s6 m3" dir="rtl">
                     <div className="card blue-grey darken-1 message message-in">
