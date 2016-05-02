@@ -23,7 +23,7 @@ router.route('/')
 
 router.route('/:conversationId')
     .get(function(req, res, next){
-        Conversation.findById(req.params.conversationId).populate('messages').exec(function (err, conversation) {
+        Conversation.findById(req.params.conversationId).populate('messages').populate('between').exec(function (err, conversation) {
             if(err)
                 res.send(err);
             res.json(conversation);

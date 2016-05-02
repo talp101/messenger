@@ -13,8 +13,8 @@ class MenuListContainer extends Component{
 
         return(
             <div>
-                {conversations.data.length > 0 &&<ConversationList conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} />}
                 {contacts.data.length > 0 && <ContactList contacts={contacts} user={user}  dispatch={dispatch} />}
+                {conversations.data.length > 0 &&<ConversationList conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} />}
             </div>
         )
     }

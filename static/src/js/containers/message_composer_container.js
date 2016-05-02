@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import * as actions from '../actions/actions';
-import { connect } from 'react-redux';
 import MessageComposer from '../components/message_composer';
 
 class MessageComposerContainer extends Component {
@@ -24,9 +23,4 @@ class MessageComposerContainer extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        user: state.user
-    }
-}
-export default connect(mapStateToProps)(MessageComposerContainer);
+export default MessageComposerContainer;

@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import * as actions from '../actions/actions';
 
-import {connect} from 'react-redux';
 import Conversation from '../components/conversation';
 
 class ConversationContainer extends Component {
@@ -20,8 +19,6 @@ class ConversationContainer extends Component {
                 self.forceUpdate();
             }
         });
-
-        dispatch(actions.fetchMessages(params.conversationId));
     }
 
     componentDidUpdate() {
@@ -46,11 +43,4 @@ class ConversationContainer extends Component {
 }
 
 
-function mapStateToProps(state) {
-    return {
-        user: state.user,
-        conversation: state.conversation
-    }
-}
-
-export default connect(mapStateToProps)(ConversationContainer);
+export default ConversationContainer;

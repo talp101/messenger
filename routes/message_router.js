@@ -17,7 +17,7 @@ router.post('/', function (req, res, next) {
             throw err;
     });
 
-    Conversation.findById(conversationId).populate('messages').exec(function (err, conversation){
+    Conversation.findById(conversationId).populate('messages').populate('between').exec(function (err, conversation){
         conversation.messages.push(newMessage);
         conversation.save(function (err) {
             if (err)
