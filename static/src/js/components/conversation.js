@@ -1,17 +1,17 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import MessageComponent from './message_component';
 
 class Conversation extends Component {
     render() {
         const {conversation, user, dispatch} = this.props;
-
-        console.log(conversation.data.messages);
         const messagesList = conversation.data.messages.map((message) => {
-            return <li key={message._id}>
-                {message.text}
-            </li>
+            //return <li key={message._id}>
+            //    {message.text}
+            //</li>
+            return <MessageComponent key={message._id} user={user} message={message} />
         });
         return (
-            <div>
+            <div className="full-div">
                 {messagesList}
             </div>
         )

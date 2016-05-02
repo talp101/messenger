@@ -34,7 +34,7 @@ class ConversationContainer extends Component {
     render() {
         const {dispatch, user, conversation} = this.props;
         return (
-            <div>
+            <div className="full-div">
                 {
                     conversation.loaded &&
                     <Conversation conversation={conversation} user={user} dispatch={dispatch}/>

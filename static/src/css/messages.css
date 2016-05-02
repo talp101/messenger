@@ -1,0 +1,20 @@
+.full-div {
+    width: 100%;
+}
+
+.message {
+    border-radius: 17px;
+}
+
+.margin-message {
+    margin-left: 75% !important;
+}
+
+.message-out {
+    background: linear-gradient(to top, #0084ff, #00C5FF) !important;
+    color:#fff !important
+}
+
+.message-in {
+    background: linear-gradient(to top, #D5D5D5, #FFFFFF);
+}
