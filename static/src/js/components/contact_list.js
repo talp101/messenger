@@ -5,13 +5,12 @@ import ContactListItem from './contact_list_item';
 class ContactList extends Component {
     openNewConversation(contact, event){
         const {dispatch, user} = this.props;
-        dispatch(actions.createNewUserFromContact(contact, user));
-        //this.context.history.push(`/conversation/${event.target.id}`, null);
+        dispatch(actions.createNewUserFromContact(contact, user, this.context.history));
     }
 
 
     render(){
-        const {contacts, user, dispatch} = this.props;
+        const {contacts, user} = this.props;
         let contactsList = contacts.data.map((contact, index) => {
             return (
                 <ContactListItem key={index} contact={contact} openNewConversation={this.openNewConversation.bind(this, contact)}  current_user={user} />

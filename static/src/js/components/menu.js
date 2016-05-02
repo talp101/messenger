@@ -12,7 +12,7 @@ class Menu extends Component{
                 <AppLogo />
                 <UserWelcome user={user} />
                 <SearchPanel dispatch={dispatch} user={user}/>
-                <MenuListContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} contacts={contacts} />
+                <MenuListContainer conversations={conversations} user={user} conversationUnreadCounters={conversationUnreadCounters} dispatch={dispatch} contacts={contacts}/>
             </ul>
         )
     }

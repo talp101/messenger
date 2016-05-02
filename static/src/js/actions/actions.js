@@ -48,7 +48,9 @@ function requestMessages() {
     }
 }
 
-function receiveMessages(conversation) {
+function receiveMessages(conversation, history=null) {
+    if(history)
+        history.push(`/conversation/${conversation._id}`, null);
     return {
         type: types.LOAD_MESSAGES_SUCCESS,
         conversation
@@ -141,11 +143,22 @@ function receiveLoginInfo(loginInfo){
     }
 }
 
-function sendMessageCompleted(conversation) {
+function sendMessageCompleted(conversation, userId) {
     return {
         type: types.SEND_MESSAGE_SUCCESS,
         conversation
+    };
+}
+
+function sendMessageCompletedAndFetchConversations(conversation, userId){
+    return dispatch => {
+        return [
+          dispatch(fetchConversations(userId)),
+          dispatch(sendMessageCompleted(conversation, userId))
+      ]
     }
+
+
 }
 
 export function sendMessage(conversationId, userId, text) {
@@ -164,7 +177,7 @@ export function sendMessage(conversationId, userId, text) {
             },
             body: JSON.stringify(messageRequestBody)
         }).then(response => response.json())
-            .then(conversation => dispatch(sendMessageCompleted(conversation)))
+            .then(conversation => dispatch(sendMessageCompletedAndFetchConversations(conversation, userId)))
             .catch(error => {
                 throw error;
             });
@@ -210,7 +223,7 @@ function receiveContacts(contacts) {
 }
 
 
-function createConversationWithUserId(currentUserId, userId) {
+function createConversationWithUserId(currentUserId, userId, history) {
     const newConversation = {
         between: [currentUserId, userId]
     };
@@ -224,27 +237,27 @@ function createConversationWithUserId(currentUserId, userId) {
             },
             body: JSON.stringify(newConversation)
         }).then(response => response.json())
-            .then(conversation => dispatch(createConversationWithUserIdCompleted(conversation, currentUserId)))
+            .then(conversation => dispatch(createConversationWithUserIdCompleted(conversation, currentUserId, history)))
             .catch(error => {
                 throw error;
             });
     }
 }
 
-function createNewUserFromContactCompleted(newUser, currentUser) {
+function createNewUserFromContactCompleted(newUser, currentUser, history) {
     return dispatch => {
-        dispatch(createConversationWithUserId(newUser._id, currentUser._id))
+        dispatch(createConversationWithUserId(newUser._id, currentUser._id, history))
     }
 }
 
-function createConversationWithUserIdCompleted(conversation, currentUserId){
+function createConversationWithUserIdCompleted(conversation, currentUserId, history){
     return dispatch => {
-        dispatch(fetchConversations(currentUserId));    
+            dispatch(receiveMessages(conversation, history));
     }
     
 }
 
-export function createNewUserFromContact(contact, currentUser){
+export function createNewUserFromContact(contact, currentUser, history){
     const newContact = {
         userName: contact.userName,
         firstName: 'tal',
@@ -260,7 +273,7 @@ export function createNewUserFromContact(contact, currentUser){
             },
             body: JSON.stringify(newContact)
         }).then(response => response.json())
-            .then(newUser => dispatch(createNewUserFromContactCompleted(newUser, currentUser)))
+            .then(newUser => dispatch(createNewUserFromContactCompleted(newUser, currentUser, history)))
             .catch(error => {
                 throw error;
             });

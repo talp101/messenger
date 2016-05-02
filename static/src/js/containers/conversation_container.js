@@ -14,9 +14,6 @@ class ConversationContainer extends Component {
         const {dispatch, user, conversation, params, socket } = this.props;
         let self = this;
         socket.on('new socket server', function (msg) {
-            console.log('got message');
-            console.log(msg);
-
             if(msg.conversationId == params.conversationId) {
                 dispatch(actions.getSocketMessage(msg));
                 dispatch(actions.fetchConversations(user._id));
@@ -36,7 +33,6 @@ class ConversationContainer extends Component {
 
     render() {
         const {dispatch, user, conversation} = this.props;
-        console.log(this.props.conversation);
         return (
             <div>
                 {

@@ -16,11 +16,7 @@ class MessageComposerContainer extends Component {
             conversationId: conversationId,
             text: text
         };
-        console.log('sending message to server');
-        console.log(newMessage);
         socket.emit('new message', newMessage);
-        console.log('finished emit');
-
         dispatch(actions.sendMessage(conversationId, userId, text));
     }
 

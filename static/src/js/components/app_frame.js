@@ -19,14 +19,14 @@ class AppFrame extends Component{
                     {this.props.children}
                 </div>
                 <div aria-layout="column" dir="rtl" aria-flex="25" aria-layout-fill aria-layout-align="start end">
-                    <Menu conversations={conversations} user={user} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters} contacts={contacts}/>
+                    <Menu conversations={conversations} user={user} dispatch={dispatch} conversationUnreadCounters={conversationUnreadCounters} contacts={contacts} />
                 </div>
             </div>
         )}
 }
 
 AppFrame.propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -34,7 +34,7 @@ function mapStateToProps(state) {
         conversations: state.conversations,
         conversationUnreadCounters: state.conversationUnreadCounters,
         user: state.user,
-        contacts: state.contacts
+        contacts: state.contacts,
     }
 }
 export default connect(mapStateToProps)(AppFrame);

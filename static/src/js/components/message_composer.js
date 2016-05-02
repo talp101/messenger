@@ -10,7 +10,6 @@ class MessageComposer extends Component {
 
     render() {
         const {params, user, sendMessage} = this.props;
-        console.log(sendMessage);
         return (
             <div className="row">
                 <form className="col s12" onSubmit={this.handleSubmit.bind(this)}>
