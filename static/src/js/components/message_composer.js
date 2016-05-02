@@ -11,12 +11,12 @@ class MessageComposer extends Component {
     render() {
         const {params, user, sendMessage} = this.props;
         return (
-            <div className="row container">
+            <div className="row m-b-n writer-wrapper">
                 <form className="col s12" onSubmit={this.handleSubmit.bind(this)}>
                     <div className="row">
-                        <div class="input-field col s12">
+                        <div className="input-field">
                             <input className="rtl" id="message" type="text" ref="message" placeholder="כתוב הודעה..."/>
-                            <button type="submit" onClick={this.handleSubmit.bind(this)} style={{display: 'none'}}></button>
+                            <button className="btn-floating btn-large waves-effect waves-light blue darken-1" type="submit" onClick={this.handleSubmit.bind(this)}><i className="material-icons">send</i></button>
                         </div>
                     </div>
                 </form>

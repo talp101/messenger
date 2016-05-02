@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 import MessageComposer from '../components/message_composer';
 
 class MessageComposerContainer extends Component {
-    componentWillMount() {
-        const { dispatch, user, params } = this.props;
-    }
-
     sendMessageDispatch(text, conversationId, userId) {
         const { dispatch, socket } = this.props;
 

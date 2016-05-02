@@ -3,7 +3,10 @@
 }
 
 .message {
-    border-radius: 17px;
+    min-width: 150%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /*border-radius: 17px;*/
 }
 
 .margin-message {
@@ -11,10 +14,58 @@
 }
 
 .message-out {
-    background: linear-gradient(to top, #0084ff, #00C5FF) !important;
+    background-color: #1E88E5 !important;
+    border-radius: 17px 17px 0px 17px;
+    /*background: linear-gradient(to top, #0084ff, #00C5FF) !important;*/
     color:#fff !important
 }
 
 .message-in {
-    background: linear-gradient(to top, #D5D5D5, #FFFFFF);
+    border-radius: 17px 17px 17px 0px;
+    /*background: linear-gradient(to top, #D5D5D5, #FFFFFF);*/
+}
+
+#message {
+    border-bottom: none !important;
+    border-radius: 17px 17px 0px 17px;
+    background-color: white;
+    padding: 5px;
+    margin: 0 !important;
+    width: 80%;
+}
+
+.writer-wrapper{
+    background-color: #E0E0E0;
+    bottom: 0;
+    position: fixed;
+    width: 75%;
+}
+
+.writer-wrapper > form{
+    padding: 10px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.writer-wrapper > form > div{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.writer-wrapper .input-field{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+}
+.writer-wrapper .input-field .material-icons{
+    margin-left: -4px;
+    transform: scaleX(-1);
+
+}
+
+.conversation-header {
+    color: white;
+    position: fixed;
+    width: 75%;
 }
