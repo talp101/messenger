@@ -16,8 +16,7 @@ class MessageComposerContainer extends Component {
             conversationId: conversationId,
             text: text
         };
-        socket.emit('new message', newMessage);
-        dispatch(actions.sendMessage(conversationId, userId, text));
+        dispatch(actions.sendMessage(conversationId, userId, text, socket));
     }
 
     render() {

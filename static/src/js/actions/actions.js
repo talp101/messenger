@@ -143,25 +143,31 @@ function receiveLoginInfo(loginInfo){
     }
 }
 
-function sendMessageCompleted(conversation, userId) {
+function sendMessageCompleted(conversation, userId, socket) {
+    const newMessage = {
+        conversationId: conversation._id,
+        message: conversation.messages[conversation.messages.length - 1]
+    };
+    socket.emit('new message', newMessage);
+
     return {
         type: types.SEND_MESSAGE_SUCCESS,
         conversation
     };
 }
 
-function sendMessageCompletedAndFetchConversations(conversation, userId){
+function sendMessageCompletedAndFetchConversations(conversation, userId, socket){
     return dispatch => {
         return [
           dispatch(fetchConversations(userId)),
-          dispatch(sendMessageCompleted(conversation, userId))
+          dispatch(sendMessageCompleted(conversation, userId, socket))
       ]
     }
 
 
 }
 
-export function sendMessage(conversationId, userId, text) {
+export function sendMessage(conversationId, userId, text, socket) {
     let messageRequestBody = {
         userId: userId,
         conversationId: conversationId,
@@ -177,7 +183,7 @@ export function sendMessage(conversationId, userId, text) {
             },
             body: JSON.stringify(messageRequestBody)
         }).then(response => response.json())
-            .then(conversation => dispatch(sendMessageCompletedAndFetchConversations(conversation, userId)))
+            .then(conversation => dispatch(sendMessageCompletedAndFetchConversations(conversation, userId, socket)))
             .catch(error => {
                 throw error;
             });

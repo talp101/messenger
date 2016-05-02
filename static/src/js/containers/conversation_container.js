@@ -15,7 +15,7 @@ class ConversationContainer extends Component {
         let self = this;
         socket.on('new socket server', function (msg) {
             if(msg.conversationId == params.conversationId) {
-                dispatch(actions.getSocketMessage(msg));
+                dispatch(actions.getSocketMessage(msg.message));
                 dispatch(actions.fetchConversations(user._id));
                 self.forceUpdate();
             }
