@@ -20,18 +20,21 @@ class ConversationContainer extends Component {
             }
         });
     }
+    
 
     componentDidUpdate() {
         if (this.id != this.props.params.conversationId) {
             this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
             this.id = this.props.params.conversationId;
         }
+        const messagesList = this.refs.messageList;
+        messagesList.scrollTop = messagesList.scrollHeight;
     }
 
     render() {
         const {dispatch, user, conversation} = this.props;
         return (
-            <div className="full-div">
+            <div className="full-div conversation-container-messages" aria-flex aria-flex="75" aria-layout="column" ref="messageList">
                 {
                     conversation.loaded &&
                     <Conversation conversation={conversation} user={user} dispatch={dispatch}/>

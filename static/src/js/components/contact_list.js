@@ -13,7 +13,7 @@ class ContactList extends Component {
         const {contacts, user} = this.props;
         let contactsList = contacts.data.map((contact, index) => {
             return (
-                <ContactListItem key={index} contact={contact} openNewConversation={this.openNewConversation.bind(this, contact)}  current_user={user} />
+                <ContactListItem key={index} contact={contact} openNewConversation={this.openNewConversation.bind(this, contact)}  current_user={user}  />
             )
         });
 
@@ -29,7 +29,7 @@ class ContactList extends Component {
 }
 
 ContactList.contextTypes = {
-    history: React.PropTypes.object
+    router: React.PropTypes.object
 };
 
 export default ContactList;

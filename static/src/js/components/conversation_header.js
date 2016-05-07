@@ -6,7 +6,7 @@ class ConversationHeader extends Component {
         if(conversation.loaded) {
             let otherUser = conversation.data.between.filter(user => user._id != current_user._id)[0];
             return (
-                <div className="grey lighten-2 conversation-header" aria-flex aria-layout="row"
+                <div className="grey lighten-2 conversation-header" aria-flex aria-flex="10" aria-layout="row"
                      aria-layout-align="center center">
                     <h4>{otherUser.lastName}</h4>
                 </div>
@@ -14,7 +14,7 @@ class ConversationHeader extends Component {
         }
         else{
             return(
-                <div className="grey lighten-2 conversation-header" aria-flex aria-layout="row"
+                <div className="grey lighten-2 conversation-header" aria-flex aria-flex="10" aria-layout="row"
                      aria-layout-align="center center">
                     <h4>בטעינה</h4>
                 </div>

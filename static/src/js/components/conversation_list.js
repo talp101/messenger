@@ -6,7 +6,7 @@ class ConversationsList extends Component {
     openConversation(conversation, event){
         const {dispatch} = this.props;
         dispatch(actions.countUnreadMessagesByConversation(conversation));
-        this.context.history.push(`/conversation/${event.target.id}`, null);
+        this.context.router.push(`/conversation/${conversation._id}`, null);
         
     }
     render(){
@@ -28,7 +28,7 @@ class ConversationsList extends Component {
 }
 
 ConversationsList.contextTypes = {
-    history: React.PropTypes.object
+    router: React.PropTypes.object
 };
 
 export default ConversationsList;

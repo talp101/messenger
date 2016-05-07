@@ -238,6 +238,10 @@
     padding-top: 55px !important;
 }
 
+.p-t-sm{
+    padding-top: 10px !important;
+}
+
 .m-xxs {
     margin: 2px 4px;
 }
@@ -375,7 +379,7 @@
 }
 
 .m-t-xxxl {
-    margin-top: 80px !important;
+    margin-top: 10px !important;
 }
 
 .m-t-n-xxs {

@@ -6,7 +6,7 @@
     min-width: 150%;
     padding-top: 10px;
     padding-bottom: 10px;
-    /*border-radius: 17px;*/
+    border-radius: 17px;
 }
 
 .margin-message {
@@ -16,13 +16,11 @@
 .message-out {
     background-color: #1E88E5 !important;
     border-radius: 17px 17px 0px 17px;
-    /*background: linear-gradient(to top, #0084ff, #00C5FF) !important;*/
     color:#fff !important
 }
 
 .message-in {
     border-radius: 17px 17px 17px 0px;
-    /*background: linear-gradient(to top, #D5D5D5, #FFFFFF);*/
 }
 
 #message {
@@ -37,12 +35,10 @@
 .writer-wrapper{
     background-color: #E0E0E0;
     bottom: 0;
-    position: fixed;
-    width: 75%;
+    width: 100%;
 }
 
 .writer-wrapper > form{
-    padding: 10px !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,6 +62,16 @@
 
 .conversation-header {
     color: white;
-    position: fixed;
-    width: 75%;
+    /*position: fixed;*/
+    width: 100%;
+}
+
+.conversation-container-messages {
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none !important;
 }

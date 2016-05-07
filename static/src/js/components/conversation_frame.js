@@ -32,7 +32,7 @@ class ConversationFrame extends Component {
     render() {
         const {current_user, conversation, dispatch} = this.props;
         return (
-            <div className="full-div h-f-s grey lighten-4">
+            <div className="full-div h-f-s grey lighten-4" aria-flex aria-layout="column">
                 <ConversationHeader params={this.props.params} current_user={current_user} conversation={conversation}/>
                 <ConversationContainer params={this.props.params} socket={socket} dispatch={dispatch} user={current_user} conversation={conversation}/>
                 <MessageComposerContainer params={this.props.params} socket={socket} user={current_user} dispatch={dispatch}/>
