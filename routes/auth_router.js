@@ -2,12 +2,15 @@ import express from 'express';
 
 import  jwt from 'jsonwebtoken';
 import User from '../models/User';
+import passport from 'passport';
+import WindowsStrategy from 'passport-windowsauth';
 
 
 const secretKey = 'tagidliadmataisheshshanimveday';
 
 
 const router = express.Router();
+
 
 
 router.post('/', function(req, res, next) {
@@ -36,7 +39,6 @@ router.post('/', function(req, res, next) {
                 }, secretKey, {
                     expiresIn: '1h' 
                 });
-                
                 res.json({
                     success: true,
                     message: "Authentication succeeded",
