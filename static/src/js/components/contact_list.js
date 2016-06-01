@@ -5,9 +5,8 @@ import ContactListItem from './contact_list_item';
 class ContactList extends Component {
     openNewConversation(contact, event){
         const {dispatch, user} = this.props;
-        dispatch(actions.createNewUserFromContact(contact, user, this.context.history));
+        dispatch(actions.createConversationWithUserId(contact._id, user._id, this.context.router));
     }
-
 
     render(){
         const {contacts, user} = this.props;

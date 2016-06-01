@@ -8,6 +8,7 @@ module.exports = {
         path: path.join(ROOT_PATH, 'build'),
         filename: 'bundle.js'
     },
+    devtool: "#inline-source-map",
     module: {
         loaders: [
             {

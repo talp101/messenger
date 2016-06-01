@@ -100,7 +100,7 @@ function initCountUnreadMessagesByConversations(conversations){
         type: types.COUNT_UNREAD_MESSAGES_INIT,
         conversations
     }
-    
+
 }
 
 function receiveCountUnreadMessagesByConversation(amountOfUnreadMessages, conversation){
@@ -245,7 +245,7 @@ function receiveContacts(contacts) {
 }
 
 
-function createConversationWithUserId(currentUserId, userId, history) {
+export function createConversationWithUserId(currentUserId, userId, history) {
     const newConversation = {
         between: [currentUserId, userId]
     };
@@ -276,7 +276,7 @@ function createConversationWithUserIdCompleted(conversation, currentUserId, hist
     return dispatch => {
             dispatch(receiveMessages(conversation, history));
     }
-    
+
 }
 
 export function createNewUserFromContact(contact, currentUser, history){

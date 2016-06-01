@@ -8,7 +8,7 @@ class ConversationHeader extends Component {
             return (
                 <div className="grey lighten-2 conversation-header" aria-flex aria-flex="10" aria-layout="row"
                      aria-layout-align="center center">
-                    <h4>{otherUser.lastName}</h4>
+                    <h4>{`${otherUser.firstName} ${otherUser.lastName}`}</h4>
                 </div>
             )
         }

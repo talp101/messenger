@@ -4,14 +4,19 @@ class ConversationListItem extends Component{
     constructor(props){
         super(props);
     }
-    
+
+    getContactFullNameFromConversation(conversation, current_user){
+      const conversationContact = conversation.between.filter(user => user._id != current_user._id)[0]
+      return `${conversationContact.firstName} ${conversationContact.lastName}`;
+    }
+
     render(){
         const {conversation, current_user, openConversation, unreadCounter} = this.props;
         return(
         <li key={conversation._id} id={conversation._id} aria-layout="row" aria-layout-align="space-between start" className="collection-item avatar" onClick={openConversation} dir="rtl">
             <i className="material-icons circle messenger-background" onClick={openConversation}>face</i>
             <div aria-layout="column" aria-layout-align="start start" dir="rtl" onClick={openConversation}>
-                <span className="title" onClick={openConversation}>{conversation.between.filter(user => user._id != current_user._id)[0].lastName}</span>
+                <span className="title" onClick={openConversation}>{this.getContactFullNameFromConversation(conversation, current_user)}</span>
                 {conversation.messages.length > 0 && <p className="brown-text text-lighten-3" onClick={openConversation}>
                     {conversation.messages[0].text.length > 20 ? conversation.messages[0].text.substring(0,20) + '...' : conversation.messages[0].text}
                 </p>}
