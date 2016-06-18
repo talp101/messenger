@@ -2,8 +2,6 @@ import express from 'express';
 
 import  jwt from 'jsonwebtoken';
 import User from '../models/User';
-import passport from 'passport';
-import WindowsStrategy from 'passport-windowsauth';
 
 
 const secretKey = 'tagidliadmataisheshshanimveday';
@@ -37,7 +35,7 @@ router.post('/', function(req, res, next) {
                     firstName: user.firstName,
                     lastName: user.lastName
                 }, secretKey, {
-                    expiresIn: '1h' 
+                    expiresIn: '1h'
                 });
                 res.json({
                     success: true,

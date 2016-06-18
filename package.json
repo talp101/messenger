@@ -33,6 +33,7 @@
     "immutable": "^3.8.0",
     "jsonwebtoken": "^6.2.0",
     "mongoose": "^4.4.13",
+    "push.js": "0.0.8",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
