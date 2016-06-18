@@ -1,9 +1,19 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import * as actions from '../actions/actions';
 
 class MessageComponent extends Component {
+
+    componentDidMount(){
+        const {message, user, dispatch} = this.props;
+        if(message.seenByUsers.indexOf(user._id) === -1){
+            dispatch(actions.updateSeenByForMessageByUserId(message._id, user._id))
+        }
+    }
+
+
     render() {
         const {message, user} = this.props;
-        if(message.user[0] !== user._id) {
+        if(message.user !== user._id) {
             return <div className="row">
                 <div className="col s6 m3">
                     <div className="card message message-in">

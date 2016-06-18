@@ -20,11 +20,10 @@ function checkForNewConversations (userId){
         .then(response => response.json())
         .then(conversations => {
             let newConversations = conversations;
-            if (!JSON.stringify(conversations)===JSON.stringify(newConversations)){
-                postMessage({conversations: newConversations});
-                console.log('updating conversations')
-            }
-            conversations = newConversations;
+            // if (!JSON.stringify(conversations)===JSON.stringify(newConversations)){
+            postMessage({conversations: newConversations});
+            console.log('updating conversations')
+            // conversations = newConversations;
 
         })
 }

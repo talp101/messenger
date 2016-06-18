@@ -9,11 +9,9 @@ export function fetchConversations(user) {
         return fetch(`/api/users/${user}/conversations/`)
             .then(response => response.json())
             .then(conversations => {
-                if (JSON.stringify(getState().conversations.data)!==JSON.stringify(conversations)){
-                    dispatch(receiveConversations(conversations));
-                    dispatch(initCountUnreadMessagesByConversations(conversations));
-                    dispatch(countUnreadMessagesByConversations(conversations));
-                }
+                // if (JSON.stringify(getState().conversations.data)!==JSON.stringify(conversations)){
+                //     console.log(conversations)
+                  dispatch(receiveConversations(conversations));
             })
             .catch(error => {throw error});
     }
@@ -300,4 +298,29 @@ export function createNewUserFromContact(contact, currentUser, history){
                 throw error;
             });
     }
+}
+
+export function updateSeenByForMessageByUserId(messageId, userId){
+    return dispatch => {
+      return fetch(`/api/messages/${messageId}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({messageId, userId})
+      }).then(response => response.json())
+      .then(updatedMessage => dispatch(updateSeenByForMessageByUserIdCompleted(messageId, userId)))
+      .catch(error=> {console.error(error)})
+    }
+}
+
+
+function updateSeenByForMessageByUserIdCompleted(messageId, userId){
+  return {
+    type: types.UPDATED_SEEN_BY_USER_COMPLETED,
+    userId,
+    messageId
+  }
+
 }

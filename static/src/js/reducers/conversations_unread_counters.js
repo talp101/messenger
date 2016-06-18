@@ -1,4 +1,4 @@
-import {COUNT_UNREAD_MESSAGES_INIT, COUNT_UNREAD_MESSAGES_SUCCESS} from '../constants/action_types';
+import {COUNT_UNREAD_MESSAGES_INIT, COUNT_UNREAD_MESSAGES_SUCCESS, UPDATED_SEEN_BY_USER_COMPLETED} from '../constants/action_types';
 import {orderConversationsByMessagesDate, saveDataToLocalStorage, getDataToLocalStorage} from '../utils/utils';
 
 const initialState = {
@@ -22,6 +22,8 @@ export default function conversationsUnreadCounters(state = initialState, action
             return {
                 data: currentConversationsUnreadCounters
             };
+        case UPDATED_SEEN_BY_USER_COMPLETED:
+            return state;
         default:
             return state;
     }

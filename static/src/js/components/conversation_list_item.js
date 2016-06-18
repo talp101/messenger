@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 class ConversationListItem extends Component{
     constructor(props){
         super(props);
+        this.getContactFullNameFromConversation = this.getContactFullNameFromConversation.bind(this);
+        this.calculateUnreadCounterByConversationAndCurrentUserId = this.calculateUnreadCounterByConversationAndCurrentUserId.bind(this);
     }
 
     getContactFullNameFromConversation(conversation, current_user){
@@ -10,22 +12,32 @@ class ConversationListItem extends Component{
       return `${conversationContact.firstName} ${conversationContact.lastName}`;
     }
 
+    calculateUnreadCounterByConversationAndCurrentUserId(conversation, currentUserId){
+      let amountOfUnreadMessages = 0;
+      for (let i = 0; i < conversation.messages.length; i++) {
+        if(conversation.messages[i].seenByUsers.indexOf(currentUserId) === -1)
+          amountOfUnreadMessages++;
+      }
+      return amountOfUnreadMessages;
+    }
+
     render(){
-        const {conversation, current_user, openConversation, unreadCounter} = this.props;
+        const {conversation, current_user, openConversation} = this.props;
+        const unreadCounter = this.calculateUnreadCounterByConversationAndCurrentUserId(conversation, current_user._id);
         return(
         <li key={conversation._id} id={conversation._id} aria-layout="row" aria-layout-align="space-between start" className="collection-item avatar" onClick={openConversation} dir="rtl">
-            <i className="material-icons circle messenger-background" onClick={openConversation}>face</i>
-            <div aria-layout="column" aria-layout-align="start start" dir="rtl" onClick={openConversation}>
-                <span className="title" onClick={openConversation}>{this.getContactFullNameFromConversation(conversation, current_user)}</span>
-                {conversation.messages.length > 0 && <p className="brown-text text-lighten-3" onClick={openConversation}>
+            <i className="material-icons circle messenger-background">face</i>
+            <div aria-layout="column" aria-layout-align="start start" dir="rtl">
+                <span className="title">{this.getContactFullNameFromConversation(conversation, current_user)}</span>
+                {conversation.messages.length > 0 && <p className="brown-text text-lighten-3">
                     {conversation.messages[0].text.length > 20 ? conversation.messages[0].text.substring(0,20) + '...' : conversation.messages[0].text}
                 </p>}
             </div>
             <div aria-layout="column" aria-layout-align="space-between center" onClick={openConversation}>
                 {unreadCounter > 0 &&
-                <span className="unread-count" onClick={openConversation}>{unreadCounter}</span>
+                <span className="unread-count">{unreadCounter}</span>
                 }
-                {conversation.messages.length > 0 && <p className="secondary-content conversation-time" onClick={openConversation}>{new Date(conversation.messages[0].timestamp).toTimeString().substring(0,5)}</p>}
+                {conversation.messages.length > 0 && <p className="secondary-content conversation-time">{new Date(conversation.messages[0].timestamp).toTimeString().substring(0,5)}</p>}
             </div>
         </li>
         )

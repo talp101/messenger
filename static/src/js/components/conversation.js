@@ -5,7 +5,7 @@ class Conversation extends Component {
     render() {
         const {conversation, user, dispatch} = this.props;
         const messagesList = conversation.data.messages.map((message) => {
-            return <MessageComponent key={message._id} user={user} message={message} />
+            return <MessageComponent key={message._id} user={user} message={message} dispatch={dispatch} />
         });
         return (
             <div className="full-div m-t-xxxl">

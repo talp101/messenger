@@ -10,7 +10,8 @@ router.post('/', function (req, res, next) {
 
     let newMessage = Message({
         text: req.body.text,
-        user: userId
+        user: userId,
+        seenByUsers: [userId]
     });
     newMessage.save(function (err) {
         if (err)
@@ -22,10 +23,16 @@ router.post('/', function (req, res, next) {
         conversation.save(function (err) {
             if (err)
                 throw err;
-
             res.json(conversation);
         });
     });
+})
+
+router.put('/:messageId', (request, response, next) => {
+    Message.findByIdAndUpdate(request.body.messageId, { $addToSet: {seenByUsers: request.body.userId }}, {safe:true, upsert:true}, (err, message)=>{
+      return response.json(message);
+    })
 });
+
 
 export default router;
