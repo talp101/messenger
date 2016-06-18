@@ -13,9 +13,7 @@ class ConversationContainer extends Component {
         const {dispatch, user, conversation, params, socket } = this.props;
         let self = this;
         socket.on('new socket server', function (msg) {
-            console.log(msg.conversationId);
-            console.log(params.conversationId);
-            if(msg.conversationId == this.id) {
+            if(msg.conversationId == self.id) {
                 dispatch(actions.getSocketMessage(msg.message));
                 dispatch(actions.fetchConversations(user._id));
                 self.forceUpdate();
@@ -25,12 +23,9 @@ class ConversationContainer extends Component {
     
 
     componentDidUpdate() {
-        console.log('component did update');
-        console.log(this.id);
-        console.log(this.props.params.conversationId);
         if (this.id != this.props.params.conversationId) {
-            console.log('updating conversation messages composer');
             this.props.dispatch(actions.fetchMessages(this.props.params.conversationId));
+            console.log(this.props.params.conversationId);
             this.id = this.props.params.conversationId;
         }
         const messagesList = this.refs.messageList;
