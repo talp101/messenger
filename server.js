@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import path from 'path';
+import favicon from 'serve-favicon';
 
 import conversations from './routes/converation_router'
 import messages from './routes/message_router'
@@ -24,6 +25,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/static', express.static('static'));
+app.use(favicon(__dirname + '/static/src/img/favicon.ico'));
 
 
 app.use('/api/conversations', conversations);

@@ -46,6 +46,7 @@
     "redux-logger": "^2.6.1",
     "redux-multi": "^0.1.12",
     "redux-thunk": "^2.0.1",
+    "serve-favicon": "^2.3.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
     "style-loader": "^0.13.1",
