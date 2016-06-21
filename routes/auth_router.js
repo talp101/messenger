@@ -2,9 +2,12 @@ import express from 'express';
 
 import  jwt from 'jsonwebtoken';
 import User from '../models/User';
+import request from 'request';
 
 
 const secretKey = 'tagidliadmataisheshshanimveday';
+
+const authenticationUrl = process.env.AUTH_URL;
 
 
 const router = express.Router();
@@ -22,14 +25,14 @@ router.post('/', function(req, res, next) {
                 message: 'Authentication failed. User not found.'
             });
         } else if(user){
-            //const validPassword = user.comparePassword(req.body.password); //  Connect to ldap for comparing password
-            const validPassword = true;
-            if (!validPassword){
+            request({url:authenticationUrl, method:"POST", json:true, body:req.body}, (err, authResponse, body) => {
+              if(body.hasOwnProperty('error')){
                 res.json({
-                    success: false,
-                    message: 'Authentication failed, Wrong password.'
-                });
-            }else {
+                  success:false,
+                  message:'Authentication failed, Wrong password'
+                })
+              }
+              else{
                 const token = jwt.sign({
                     userName: user.userName,
                     firstName: user.firstName,
@@ -43,9 +46,10 @@ router.post('/', function(req, res, next) {
                     token: token,
                     user: user
                 });
-            }
+              }
+            });
+            const validPassword = true;
         }
-
     })
 });
 
